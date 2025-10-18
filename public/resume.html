@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Hayden Lindley — Résumé</title>
+  <meta name="description" content="Résumé for Hayden Lindley — Creative Technologist & AI Systems Engineer."/>
+
+  <!-- Fonts: Inter + Newsreader (variable) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="/logo-corgfolio-mark.svg" type="image/svg+xml"/>
+
+  <style>
+    /* ===============================
+       Tokens & base
+    ================================*/
+    :root{
+      --bg: #fcfbf9;              /* paper-ish */
+      --panel: #ffffff;
+      --ink: #0b0f14;             /* primary text */
+      --muted: #5d6472;           /* secondary */
+      --rule: #e8ebf0;
+      --soft-rule: #f2f4f7;
+      --teal: #22d3ee;            /* accents (very sparingly) */
+      --pink: #ff3ea5;
+      --orange: #ff9f1c;
+
+      --max: 72rem;               /* ~1152px */
+      --measure: 68ch;            /* ideal text width */
+      --radius-xl: 20px;
+      --radius-md: 14px;
+
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+    }
+
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--ink);
+      background:linear-gradient(#fff, var(--bg) 22vh) fixed;
+      font-family: "Newsreader", ui-serif, Georgia, serif;
+      font-size:16.5px;
+      line-height:1.58;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      font-feature-settings: "liga","kern","onum","pnum";
+    }
+    *{box-sizing:border-box}
+
+    a{color:inherit;text-underline-offset:3px}
+    .wrap{max-width:var(--max); margin: clamp(28px,4vw,56px) auto; padding: 0 clamp(16px,3vw,28px)}
+
+    /* ===============================
+       Header
+    ================================*/
+    .card{
+      background:var(--panel);
+      border:1px solid var(--soft-rule);
+      border-radius:var(--radius-xl);
+      box-shadow:0 8px 40px rgba(9,12,20,.06);
+    }
+    .hdr{padding: clamp(18px,2vw,24px); display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center}
+    @media (max-width:880px){ 
+      .hdr{grid-template-columns:1fr; gap:16px; text-align:center}
+      .meta{text-align:center !important}
+    }
+
+    .id{
+      display:flex; gap:16px; align-items:center; min-width:0;
+    }
+    @media (max-width:880px){ 
+      .id{justify-content:center}
+    }
+    .badge{
+      width:72px; height:72px; border-radius:16px;
+      background:#0a0c12; display:grid; place-items:center;
+      box-shadow:0 4px 14px rgba(0,0,0,.18)
+    }
+    .badge img{width:56px; height:56px}
+    h1{
+      font-family:"Inter", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+      font-weight:900; font-size:clamp(28px,4.4vw,40px); line-height:1.05; letter-spacing:-0.015em;
+      margin:0;
+    }
+    .role{
+      font-family:"Inter", system-ui, sans-serif;
+      color:var(--muted); font-weight:600; letter-spacing:.01em; margin-top:4px;
+    }
+    .meta{
+      font-family:"Inter", system-ui, sans-serif;
+      color:var(--muted); font-weight:500; text-align:right; line-height:1.55;
+    }
+    .meta a{opacity:.9}
+    .bar{
+      display:flex; gap:10px; padding: 0 clamp(12px,1.6vw,16px) clamp(14px,1.6vw,18px);
+      border-top:1px solid var(--soft-rule);
+    }
+    @media (max-width:880px){ 
+      .bar{flex-direction:column; align-items:center}
+      .btn{width:100%; max-width:200px; justify-content:center}
+    }
+    .btn{
+      --ring: 0 0 0 0 rgba(0,0,0,0);
+      display:inline-flex; align-items:center; gap:10px;
+      font-family:"Inter", system-ui, sans-serif; font-weight:600; font-size:14px;
+      background:#fff; border:1px solid var(--rule); color:var(--ink);
+      padding:10px 14px; border-radius:12px; text-decoration:none;
+      box-shadow:var(--ring);
+      transition: box-shadow .2s ease, transform .12s ease, border-color .2s ease;
+    }
+    .btn:hover{transform:translateY(-1px); border-color:#dbe1ea}
+    .btn:focus-visible{outline:none; box-shadow:0 0 0 6px rgba(34,211,238,.22)}
+    .btn.primary{
+      border-color:transparent; color:#071016;
+      background:linear-gradient(90deg, var(--teal), var(--pink));
+    }
+
+    /* ===============================
+       Sections
+    ================================*/
+    .sec{margin-top:var(--space-8); padding: clamp(18px,2vw,24px)}
+    .sec h2{
+      margin:0 0 var(--space-3);
+      font-family:"Inter", system-ui, sans-serif;
+      font-weight:800; font-size:13.5px; letter-spacing:.12em; text-transform:uppercase;
+      color:#2b3240;
+    }
+    .sec p, .sec ul, .sec li { max-width: var(--measure); }
+    .lede{
+      font-size: clamp(17px,1.25vw,18.5px);
+      color:#1a1f27;
+    }
+
+    .grid{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+    @media (max-width:880px){ .grid{grid-template-columns:1fr} .meta{text-align:left} }
+
+    .chiprow{display:flex; flex-wrap:wrap; gap:10px}
+    .chip{
+      font-family:"Inter", system-ui, sans-serif;
+      border:1px solid var(--rule); border-radius:999px; padding:6px 10px;
+      font-weight:600; font-size:13px; background:#fafbfd;
+    }
+
+    .roleblk{margin-top:var(--space-4)}
+    .roleblk h3{
+      margin:0 0 4px; font-family:"Inter", system-ui, sans-serif;
+      font-size:16.5px; font-weight:700; letter-spacing:-.005em;
+    }
+    .where{
+      font-family:"Inter", system-ui, sans-serif; color:var(--muted);
+      font-weight:600; margin-bottom:6px;
+    }
+    ul{margin:8px 0 0 20px}
+    li{margin:6px 0}
+
+    .foot{
+      text-align:center; color:var(--muted); font-family:"Inter", system-ui, sans-serif;
+      font-size:13.5px; padding: var(--space-6) 0 var(--space-4);
+    }
+    .tagline{
+      background:linear-gradient(90deg,var(--teal),var(--pink)); -webkit-background-clip:text;
+      background-clip:text; color:transparent; font-weight:800;
+    }
+
+    /* print */
+    @media print{
+      body{background:#fff}
+      .card{box-shadow:none; border-color:#ddd}
+      .bar{display:none}
+      .wrap{margin:0; padding:0}
+      a{text-decoration:none; color:inherit}
+      .sec{page-break-inside:avoid}
+      @page{margin: 18mm}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Header card -->
+    <section class="card">
+      <header class="hdr">
+        <div class="id">
+          <div class="badge"><img src="/logo-corgfolio-mark.svg" alt="Corg-verse badge"></div>
+          <div>
+            <h1>Hayden Lindley</h1>
+            <div class="role">Creative Technologist & AI Systems Engineer</div>
+          </div>
+        </div>
+        <div class="meta">
+          Austin, TX · <a href="mailto:hayden@example.com">hayden@example.com</a> · (512) 555-0123<br/>
+          <a href="https://corgfolio.com" target="_blank">corgfolio.com</a> ·
+          <a href="https://www.linkedin.com/in/haydenlindley" target="_blank">linkedin.com/in/haydenlindley</a> ·
+          <a href="https://github.com/hayden" target="_blank">github.com/hayden</a>
+        </div>
+      </header>
+      <div class="bar">
+        <a class="btn primary" href="javascript:window.print()">Download PDF</a>
+        <a class="btn" href="/">Back to site</a>
+      </div>
+    </section>
+
+    <!-- Summary -->
+    <section class="card sec">
+      <h2>Professional Summary</h2>
+      <p class="lede">
+        Creative Technologist & AI Systems Engineer blending 30+ years of software with a designer's intuition and a counselor's empathy.
+        Fluent in <b>LLM orchestration</b>, <b>interactive 3D</b>, and <b>scalable product systems</b>.
+        Founder of ventures featured in <i>Dwell Magazine</i>, builder of 15+ production-grade web apps in 60 days, and advocate for humane technology.
+        Seeking to architect products where AI amplifies human creativity and interfaces feel like companions, not tools.
+      </p>
+    </section>
+
+    <!-- Skills -->
+    <section class="card sec">
+      <h2>Core Skills</h2>
+      <div class="grid">
+        <div>
+          <div class="roleblk">
+            <h3>AI & Machine Learning</h3>
+            <div class="chiprow">
+              <span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">TensorFlow</span>
+              <span class="chip">LangChain</span><span class="chip">OpenAI / Claude APIs</span>
+              <span class="chip">NLP & CV</span><span class="chip">MLOps</span>
+            </div>
+          </div>
+          <div class="roleblk">
+            <h3>Creative Coding</h3>
+            <div class="chiprow">
+              <span class="chip">React</span><span class="chip">Three.js / R3F</span><span class="chip">WebGL / GLSL</span>
+              <span class="chip">Processing / p5.js</span><span class="chip">Unity (proto)</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="roleblk">
+            <h3>Full-Stack & Ops</h3>
+            <div class="chiprow">
+              <span class="chip">TypeScript</span><span class="chip">Next.js</span><span class="chip">Node</span>
+              <span class="chip">FastAPI</span><span class="chip">PostgreSQL</span><span class="chip">Redis</span>
+              <span class="chip">AWS / GCP</span><span class="chip">Docker</span><span class="chip">CI/CD</span>
+            </div>
+          </div>
+          <div class="roleblk">
+            <h3>Design & Prototyping</h3>
+            <div class="chiprow">
+              <span class="chip">Figma</span><span class="chip">Blender</span><span class="chip">Adobe CC</span>
+              <span class="chip">UX Systems</span><span class="chip">Data Visualization</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="card sec">
+      <h2>Experience</h2>
+      <div class="roleblk">
+        <h3>Independent Software Engineer / Creative Technologist</h3>
+        <div class="where">Self-Employed · Austin, TX · 2018–Present</div>
+        <ul>
+          <li>Designed and launched 15+ live apps (AI chat, creative tools, data-viz) in under two months.</li>
+          <li>Built LLM integration frameworks for interactive and generative experiences.</li>
+          <li>Created immersive 3D work (Three.js / WebGL) for installation and web contexts.</li>
+          <li>Consulted across AI research and creative agencies to ship production-grade systems.</li>
+        </ul>
+      </div>
+
+      <div class="roleblk">
+        <h3>Founder & CEO — Modern Prefab Housing Venture</h3>
+        <div class="where">Austin, TX · 2012–2018</div>
+        <ul>
+          <li>Studio featured in <i>Dwell Magazine</i> for sustainable design and digital fabrication.</li>
+          <li>Automated CAD/CAM flows; optimized production and supply chain with software.</li>
+          <li>Led cross-disciplinary teams across architecture, manufacturing, and product.</li>
+        </ul>
+      </div>
+
+      <div class="roleblk">
+        <h3>Senior Software Engineer</h3>
+        <div class="where">Various Firms · 1993–2012</div>
+        <ul>
+          <li>Delivered web, desktop, and VR software across gaming, health tech, and enterprise.</li>
+          <li>Prototyped early VR therapy apps—years before mainstream adoption.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Education & Highlights -->
+    <section class="card sec">
+      <h2>Education & Highlights</h2>
+      <div class="grid">
+        <div>
+          <div class="roleblk">
+            <h3>Education</h3>
+            <ul>
+              <li>MA, Counseling Psychology — University Name (2009)</li>
+              <li>BFA — University Name (1997)</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="roleblk">
+            <h3>Selected Projects & Recognition</h3>
+            <ul>
+              <li><b>GlyphOS</b> — browser-based AI operating system & creative lab.</li>
+              <li><b>Corg-folio</b> — 3D interactive portfolio (Next.js + R3F).</li>
+              <li><b>Etifyd</b> — constitutional-AI training sandbox.</li>
+              <li>Featured in <i>Dwell Magazine</i> for prefab innovation.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      Built with care in the Corg-verse •
+      <span class="tagline">Build things that think — and care.</span>
+    </footer>
+  </div>
+
+  <!-- Optional: keyboard 'p' to print -->
+  <script>
+    addEventListener('keydown', e => { if ((e.key==='p' || e.key==='P') && (e.ctrlKey||e.metaKey)===false) { e.preventDefault(); window.print(); }});
+  </script>
+</body>
+</html>
