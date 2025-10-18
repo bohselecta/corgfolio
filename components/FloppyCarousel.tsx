@@ -115,9 +115,9 @@ function createFloppyDisk(index: number) {
     const edges = new THREE.LineSegments(edgesGeometry, edgesMaterial);
     group.add(edges);
     
-    // === SIMPLE CUSTOM LABEL TEXTURE (just use your blank-floppy-label.png) ===
+    // === CUSTOM LABEL TEXTURE (use numbered labels) ===
     const textureLoader = new THREE.TextureLoader();
-    const labelTexture = textureLoader.load('/blank-floppy-label.png');
+    const labelTexture = textureLoader.load(`/label${index + 1}.jpg`);
     labelTexture.flipY = false; // Reset texture flips
     labelTexture.anisotropy = 16;
     const textMaterial = new THREE.MeshBasicMaterial({ 
