@@ -32,7 +32,7 @@ export default function CorgVerseConsole({
   return (
     <section id="corg-verse-console" className="mx-auto mt-24 w-full max-w-7xl px-6">
       {/* Styled header */}
-      <div className="mb-16 text-center">
+      <div className="mb-8 text-center">
         <h2 className="neon text-4xl font-black leading-tight tracking-tight text-white md:text-5xl">
           In the <span className="text-[var(--brand-warm)]">Corg-verse</span>, everything runs off floppies.
         </h2>
@@ -66,9 +66,6 @@ export default function CorgVerseConsole({
               )}
             </AnimatePresence>
           </div>
-          <p className="mt-3 text-sm text-white/70">
-            Insert a disk to boot a project.
-          </p>
         </div>
 
         {/* Disk browser */}

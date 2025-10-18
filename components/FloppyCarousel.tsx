@@ -7,9 +7,9 @@ import { TronFloor } from "./TronFloor";
 
 // Project data for each floppy disk
 const projects = [
-    { title: "PROJECT_001", description: "Web Application Design", tech: "React • Node.js • MongoDB", color: 0x00ffff },
-    { title: "PROJECT_002", description: "Brand Identity System", tech: "Illustrator • After Effects", color: 0xff00ff },
-    { title: "PROJECT_003", description: "3D Product Visualization", tech: "Blender • Three.js • WebGL", color: 0x00ff00 },
+    { title: "PROJECT_001", description: "Web Application Design", tech: "React • Node.js • MongoDB", color: 0x00ffff, url: "https://project1.com", github: "github.com/user/project1" },
+    { title: "PROJECT_002", description: "Brand Identity System", tech: "Illustrator • After Effects", color: 0xff00ff, url: "https://project2.com", github: "github.com/user/project2" },
+    { title: "PROJECT_003", description: "3D Product Visualization", tech: "Blender • Three.js • WebGL", color: 0x00ff00, url: "https://project3.com", github: "github.com/user/project3" },
     { title: "PROJECT_004", description: "Motion Graphics Reel", tech: "After Effects • Cinema 4D", color: 0xffff00 },
     { title: "PROJECT_005", description: "Interactive Installation", tech: "TouchDesigner • Arduino", color: 0xff6600 },
     { title: "PROJECT_006", description: "E-commerce Platform", tech: "Vue.js • Stripe • AWS", color: 0x00ffff },
@@ -37,7 +37,7 @@ function createFloppyDisk(index: number) {
     // SVG shows: width=668, height=701, so aspect ratio ~0.95
     const bodyGeometry = new THREE.BoxGeometry(2.0, 2.1, 0.1, 4, 4, 1);
     const bodyMaterial = new THREE.MeshStandardMaterial({ 
-        color: 0x434d57,  // Matches SVG fill color
+        color: 0xB6B19A,  // Custom beige color
         roughness: 0.8,
         metalness: 0.1
     });
@@ -50,9 +50,9 @@ function createFloppyDisk(index: number) {
     // SVG shows large white rectangle at top - reduced to 90% width
     const labelGeometry = new THREE.BoxGeometry(1.44, 1.0, 0.001); // 1.6 * 0.9 = 1.44
     const labelMaterial = new THREE.MeshStandardMaterial({ 
-        color: 0xeeeeee,  // Matches SVG fill color
-        roughness: 0.9,
-        metalness: 0.0
+        color: 0xB6B19A,  // Match disk body color
+        roughness: 0.8,
+        metalness: 0.1
     });
     const label = new THREE.Mesh(labelGeometry, labelMaterial);
     label.position.set(0, 0.5, 0.051); // Top section, facing up for filing
@@ -115,10 +115,11 @@ function createFloppyDisk(index: number) {
     const edges = new THREE.LineSegments(edgesGeometry, edgesMaterial);
     group.add(edges);
     
-    // === CUSTOM LABEL TEXTURE (using your blank-floppy-label.png) ===
+    // === SIMPLE CUSTOM LABEL TEXTURE (just use your blank-floppy-label.png) ===
     const textureLoader = new THREE.TextureLoader();
     const labelTexture = textureLoader.load('/blank-floppy-label.png');
-    labelTexture.flipY = false;
+    labelTexture.flipY = false; // Reset texture flips
+    labelTexture.flipX = true; // Flip horizontally
     labelTexture.anisotropy = 16;
     const textMaterial = new THREE.MeshBasicMaterial({ 
         map: labelTexture,
@@ -128,6 +129,7 @@ function createFloppyDisk(index: number) {
     const textPlane = new THREE.PlaneGeometry(1.39, 0.95); // Adjusted to match reduced label width
     const textMesh = new THREE.Mesh(textPlane, textMaterial);
     textMesh.position.set(0, 0.5, 0.052); // Positioned on white label area
+    textMesh.rotation.z = 0; // Reset rotation
     group.add(textMesh);
     
     // Store references for animation
@@ -148,7 +150,7 @@ function FloppyDisk({ index, scroll }: { index: number; scroll: () => number }) 
         if (!meshRef.current) return;
         
         const progress = scroll();
-        const targetIndex = progress * 19; // Maps to disk 0-19
+        const targetIndex = progress * 4; // Maps to disk 0-4
         const distanceFromCenter = index - targetIndex;
         const absDistance = Math.abs(distanceFromCenter);
         
@@ -156,7 +158,7 @@ function FloppyDisk({ index, scroll }: { index: number; scroll: () => number }) 
         const diskSpacing = 3.5;
         meshRef.current.position.x = distanceFromCenter * diskSpacing;
         meshRef.current.position.z = -absDistance * 0.8;
-        meshRef.current.position.y = 0.5 - absDistance * 0.3; // Position above floor
+        meshRef.current.position.y = -1.5 - absDistance * 0.3; // Position below floor
         
         // Rotation
         const rotationAngle = Math.sign(distanceFromCenter) * Math.PI * 0.25 * Math.min(absDistance, 2);
@@ -214,15 +216,60 @@ function FloppyDisk({ index, scroll }: { index: number; scroll: () => number }) 
     );
 }
 
+function StarField() {
+    const starsRef = useRef<THREE.Points>(null!);
+    
+    const starsGeometry = useMemo(() => {
+        const geometry = new THREE.BufferGeometry();
+        const starCount = 2000;
+        const positions = new Float32Array(starCount * 3);
+        
+        for (let i = 0; i < starCount; i++) {
+            // Create stars in a large sphere around the scene
+            const radius = 20 + Math.random() * 30;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos(2 * Math.random() - 1);
+            
+            positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+            positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+            positions[i * 3 + 2] = radius * Math.cos(phi);
+        }
+        
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        return geometry;
+    }, []);
+    
+    const starsMaterial = useMemo(() => {
+        return new THREE.PointsMaterial({
+            color: 0xffffff,
+            size: 2.0,
+            sizeAttenuation: false,
+            transparent: true,
+            opacity: 1.0
+        });
+    }, []);
+    
+    useFrame((state) => {
+        if (starsRef.current) {
+            // Slow rotation for subtle movement
+            starsRef.current.rotation.y += 0.0001;
+        }
+    });
+    
+    return <points ref={starsRef} geometry={starsGeometry} material={starsMaterial} />;
+}
+
 function Scene() {
     const sc = useScroll();
     const scroll = () => sc.offset; // 0..1
     
     return (
         <>
+            {/* Starfield */}
+            <StarField />
+            
             {/* Environment */}
-            <color attach="background" args={["#0a0a0a"]} />
-            <fog attach="fog" args={["#0a0a0a", 10, 40]} />
+            <fog attach="fog" args={["#000011", 15, 50]} />
             
             {/* Enhanced Lighting System */}
             <ambientLight intensity={0.9} color="#606060" />
@@ -267,10 +314,10 @@ function Scene() {
             </mesh>
             
             {/* TRON Floor */}
-            <TronFloor size={36} />
+            <TronFloor size={36} position={[0, -2, 0]} />
             
             {/* Floppy disks */}
-            {Array.from({ length: 20 }, (_, i) => (
+            {Array.from({ length: 5 }, (_, i) => (
                 <FloppyDisk key={i} index={i} scroll={scroll} />
             ))}
         </>
@@ -279,9 +326,9 @@ function Scene() {
 
 export default function FloppyCarousel() {
     return (
-        <div className="relative h-[90svh] w-full">
+        <div className="relative h-[90svh] w-full bg-[#000011]">
             <Canvas 
-                camera={{ position: [0, 2, 8], fov: 50 }}
+                camera={{ position: [0, 1, 8], fov: 50 }}
                 shadows
                 gl={{ 
                     antialias: true,
@@ -301,8 +348,20 @@ export default function FloppyCarousel() {
                     Step into the <span className="text-[var(--brand-warm)]">Corg-verse</span>
                 </h2>
                 <p className="mt-3 text-[var(--brand-ink)]/80">
-                  Scroll to navigate through the floppy disk collection. WASD vibes optional. 🕹️
+                  Scroll to navigate through the floppy disk collection.
                 </p>
+                
+                {/* Personal Picture Circle */}
+                <div className="mt-8 flex justify-center">
+                    <div className="relative rounded-full border-2 border-cyan-400/50 bg-gradient-to-br from-cyan-400/20 to-purple-500/20 backdrop-blur-sm" style={{ width: '175px', height: '175px' }}>
+                        {/* Your profile picture */}
+                        <img 
+                            src="/profile-pic.jpg" 
+                            alt="Profile" 
+                            className="absolute inset-0 rounded-full object-cover"
+                        />
+                    </div>
+                </div>
             </div>
 
             {/* subtle gradient top/bottom to blend */}

@@ -17,11 +17,11 @@ export default function Page() {
   return (
     <main>
       <HeroHeader />
-      <div className="pt-20">
+      <div className="pt-8">
         <FloppyCarousel />
 
         {/* Spacer before Corg-verse Console */}
-        <div className="h-[20svh]" />
+        <div className="h-[8svh]" />
 
         <CorgVerseConsole projects={projects} />
 
