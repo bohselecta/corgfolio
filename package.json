@@ -1,0 +1,39 @@
+{
+  "name": "corgfolio-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "PORT=3001 next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
+    "build:check": "pnpm type-check && pnpm lint && pnpm build",
+    "docker:dev": "docker-compose up corgfolio-dev",
+    "docker:prod": "docker-compose up corgfolio-prod",
+    "docker:build": "docker-compose build",
+    "precommit": "pnpm type-check && pnpm lint"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.6",
+    "@react-three/fiber": "^9.4.0",
+    "framer-motion": "^12.23.24",
+    "next": "15.5.6",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/three": "^0.180.0",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.6",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
