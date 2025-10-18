@@ -1,9 +1,10 @@
 "use client";
 import * as THREE from "three";
 import { useMemo, useRef, useState, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { ScrollControls, useScroll } from "@react-three/drei";
 import { TronFloor } from "./TronFloor";
+import { createLabelTexture } from "@/utils/createLabelTexture";
 
 // Project data for each floppy disk
 const projects = [
@@ -38,8 +39,8 @@ function createFloppyDisk(index: number) {
     const bodyGeometry = new THREE.BoxGeometry(2.0, 2.1, 0.1, 4, 4, 1);
     const bodyMaterial = new THREE.MeshStandardMaterial({ 
         color: 0xB6B19A,  // Custom beige color
-        roughness: 0.8,
-        metalness: 0.1
+        roughness: 0.85,
+        metalness: 0.05
     });
     const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
     body.castShadow = true;
@@ -55,30 +56,30 @@ function createFloppyDisk(index: number) {
         metalness: 0.1
     });
     const label = new THREE.Mesh(labelGeometry, labelMaterial);
-    label.position.set(0, 0.5, 0.051); // Top section, facing up for filing
+    label.position.set(0, 0.4, 0.051); // Moved down 10 pixels (0.1 units)
     group.add(label);
     
     // === METAL SHUTTER (bottom section, like SVG) ===
     // SVG shows darker rectangle at bottom - reduced to 60% width, scaled vertically by 15%
-    const shutterGeometry = new THREE.BoxGeometry(0.96, 0.828, 0.001); // 0.69 * 1.2 = 0.828 (20% taller)
+    const shutterGeometry = new THREE.BoxGeometry(1.152, 0.782, 0.001); // 0.869 * 0.9 = 0.782 (10% shorter)
     const shutterMaterial = new THREE.MeshStandardMaterial({ 
         color: 0xc8d1d6,  // Much lighter grey metal
-        roughness: 0.2,
-        metalness: 0.8
+        roughness: 0.35,
+        metalness: 0.6
     });
     const shutter = new THREE.Mesh(shutterGeometry, shutterMaterial);
-    shutter.position.set(0, -0.6, 0.051); // Bottom section
+    shutter.position.set(0, -0.67, 0.051); // Moved up 3 pixels (0.03 units)
     group.add(shutter);
     
     // === SMALL RECTANGLE OVER METAL PLATE (offset to side, 1/3rd across) ===
-    const smallRectGeometry = new THREE.BoxGeometry(0.2, 0.54, 0.002); // 0.45 * 1.2 = 0.54 (20% taller)
+    const smallRectGeometry = new THREE.BoxGeometry(0.24, 0.54, 0.002); // 0.2 * 1.2 = 0.24 (20% wider)
     const smallRectMaterial = new THREE.MeshStandardMaterial({ 
         color: 0x666666,  // Darker gray for contrast
-        roughness: 0.3,
-        metalness: 0.6
+        roughness: 0.5,
+        metalness: 0.4
     });
     const smallRect = new THREE.Mesh(smallRectGeometry, smallRectMaterial);
-    smallRect.position.set(-0.25, -0.6, 0.052); // Moved toward center, less offset from left side
+    smallRect.position.set(-0.25, -0.67, 0.052); // Moved up 3 pixels (0.03 units)
     group.add(smallRect);
     
     
@@ -115,25 +116,11 @@ function createFloppyDisk(index: number) {
     const edges = new THREE.LineSegments(edgesGeometry, edgesMaterial);
     group.add(edges);
     
-    // === CUSTOM LABEL TEXTURE (use numbered labels) ===
-    const textureLoader = new THREE.TextureLoader();
-    const labelTexture = textureLoader.load(`/label${index + 1}.jpg`);
-    labelTexture.flipY = true; // Flip vertically
-    labelTexture.anisotropy = 16;
-    const textMaterial = new THREE.MeshBasicMaterial({ 
-        map: labelTexture,
-        transparent: true,
-        opacity: 1,
-        side: THREE.DoubleSide
-    });
-    const textPlane = new THREE.PlaneGeometry(1.39, 0.95); // Adjusted to match reduced label width
-    const textMesh = new THREE.Mesh(textPlane, textMaterial);
-    textMesh.position.set(0, 0.5, 0.052); // Positioned on white label area
-    textMesh.rotation.z = 0; // Reset rotation
-    group.add(textMesh);
+    // === LABEL TEXTURE ===
+    // Label texture and material are now handled in the FloppyDisk component
+    // where we have access to the renderer for proper texture creation
     
     // Store references for animation
-    group.userData.textMaterial = textMaterial;
     group.userData.project = project;
     group.userData.index = index;
     group.userData.edges = edges;
@@ -145,6 +132,16 @@ function createFloppyDisk(index: number) {
 function FloppyDisk({ index, scroll }: { index: number; scroll: () => number }) {
     const meshRef = useRef<THREE.Group>(null!);
     const diskGeometry = useMemo(() => createFloppyDisk(index), [index]);
+    const { gl } = useThree();
+    
+    // Create proper label texture and material
+    const labelTexture = useMemo(() => createLabelTexture(`/label${index + 1}.jpg`, gl), [index, gl]);
+    const labelMaterial = useMemo(() => new THREE.MeshBasicMaterial({
+        map: labelTexture,
+        side: THREE.FrontSide,
+        toneMapped: false,     // Critical for color accuracy
+        fog: false            // Critical to ignore scene fog
+    }), [labelTexture]);
     
     useFrame(() => {
         if (!meshRef.current) return;
@@ -175,9 +172,7 @@ function FloppyDisk({ index, scroll }: { index: number; scroll: () => number }) 
             }
             
             // Show text
-            if (meshRef.current.userData.textMaterial) {
-                meshRef.current.userData.textMaterial.opacity = 0.95;
-            }
+            labelMaterial.opacity = 0.95;
             
             // Enhanced edge glow
             if (meshRef.current.userData.edges) {
@@ -198,9 +193,7 @@ function FloppyDisk({ index, scroll }: { index: number; scroll: () => number }) 
             }
             
             // Hide text
-            if (meshRef.current.userData.textMaterial) {
-                meshRef.current.userData.textMaterial.opacity = Math.max(0, 0.3 - absDistance * 0.2);
-            }
+            labelMaterial.opacity = Math.max(0, 0.3 - absDistance * 0.2);
             
             // Dim edge glow
             if (meshRef.current.userData.edges) {
@@ -212,6 +205,11 @@ function FloppyDisk({ index, scroll }: { index: number; scroll: () => number }) 
     return (
         <group ref={meshRef}>
             {diskGeometry && <primitive object={diskGeometry} />}
+            {/* Add the label as a separate mesh with proper material */}
+            <mesh position={[0, 0.4, 0.052]} rotation={[0, 0, 0]} renderOrder={999}>
+                <planeGeometry args={[1.39, 1.1]} />
+                <primitive object={labelMaterial} attach="material" />
+            </mesh>
         </group>
     );
 }
@@ -356,39 +354,39 @@ function Scene() {
             <fog attach="fog" args={["#000011", 15, 50]} />
             
             {/* Enhanced Lighting System */}
-            <ambientLight intensity={0.9} color="#606060" />
+            <ambientLight intensity={0.35} color="#505a66" />
             
             {/* Key Light - Main directional light with shadows */}
             <directionalLight 
-                position={[5, 8, 5]} 
-                intensity={1.8} 
+                position={[4, 6, 5]} 
+                intensity={1.0} 
                 color="#ffffff"
                 castShadow
-                shadow-mapSize-width={2048}
-                shadow-mapSize-height={2048}
+                shadow-mapSize-width={1024}
+                shadow-mapSize-height={1024}
                 shadow-camera-near={0.5}
                 shadow-camera-far={50}
             />
             
-            {/* Fill Light - Blue tint from left */}
+            {/* Fill Light - Neutral fill from left */}
             <directionalLight 
-                position={[-5, 2, -5]} 
-                intensity={0.4} 
-                color="#0088ff" 
+                position={[-4, 2, -4]} 
+                intensity={0.25} 
+                color="#cfd6e0" 
             />
             
-            {/* Rim Light - Cyan glow from front */}
+            {/* Rim Light - Softer cyan glow from front */}
             <pointLight 
                 position={[0, 3, -5]} 
-                intensity={0.8} 
-                color="#00ffff" 
+                intensity={0.35} 
+                color="#88ffff" 
             />
             
-            {/* Accent Light - Magenta from below for extra shine */}
+            {/* Accent Light - Gentler magenta from below for extra shine */}
             <pointLight 
                 position={[0, -2, 3]} 
-                intensity={0.3} 
-                color="#ff00ff" 
+                intensity={0.18} 
+                color="#ff66e0" 
             />
             
             {/* Invisible ground plane for shadows */}
@@ -420,7 +418,7 @@ export default function FloppyCarousel() {
                     antialias: true,
                     alpha: true,
                     toneMapping: THREE.ACESFilmicToneMapping,
-                    toneMappingExposure: 1.2
+                    toneMappingExposure: 1.0
                 }}
             >
                 <ScrollControls pages={5} damping={0.15}>
