@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import "./../styles/brand.css";
 
 const CorgVerseConsole = dynamic(() => import("@/components/CorgVerseConsole"), { ssr: false });
+const SiteFooter = dynamic(() => import("@/components/SiteFooter"), { ssr: false });
 
 const projects = [
   { id: "neon-studio", title: "Neon Studio", img: "/previews/neon-studio.jpg" },
@@ -31,9 +32,7 @@ export default function Page() {
         <CorgVerseConsole projects={projects} />
 
         {/* Footer below */}
-        <footer className="mx-auto mt-16 w-full max-w-7xl px-6 py-12 text-[var(--brand-muted)]">
-          © {new Date().getFullYear()} Hayden • Corg-folio
-        </footer>
+        <SiteFooter />
       </div>
     </main>
   );
