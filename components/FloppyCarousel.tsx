@@ -124,7 +124,8 @@ function createFloppyDisk(index: number) {
     const textMaterial = new THREE.MeshBasicMaterial({ 
         map: labelTexture,
         transparent: true,
-        opacity: 1
+        opacity: 1,
+        side: THREE.DoubleSide
     });
     const textPlane = new THREE.PlaneGeometry(1.39, 0.95); // Adjusted to match reduced label width
     const textMesh = new THREE.Mesh(textPlane, textMaterial);
