@@ -296,45 +296,134 @@ function InteractiveCursorOverlay() {
 
 function PawField() {
     const pawsRef = useRef<THREE.Group>(null!);
+    const pawDataRef = useRef<Array<{id: number, x: number, y: number, z: number, speed: number, opacity: number, rotation: number}>>([]);
     
-    const paws = useMemo(() => {
-        const pawCount = 400;
-        const pawElements = [];
+    // Create clipping plane to hide paws in front of floppy carousel
+    const clippingPlane = useMemo(() => {
+        const plane = new THREE.Plane(new THREE.Vector3(0, 0, -1), 1); // Normal pointing towards camera, distance 1
+        return plane;
+    }, []);
+    
+    // Initialize paw data
+    useMemo(() => {
+        const pawCount = 260; // Increased by 30% for denser Matrix effect
+        pawDataRef.current = [];
         
         for (let i = 0; i < pawCount; i++) {
-            // Create paws in a large sphere around the scene
-            const radius = 20 + Math.random() * 30;
-            const theta = Math.random() * Math.PI * 2;
-            const phi = Math.acos(2 * Math.random() - 1);
-            
-            const x = radius * Math.sin(phi) * Math.cos(theta);
-            const y = radius * Math.sin(phi) * Math.sin(theta);
-            const z = radius * Math.cos(phi);
-            
-            // Random rotation for each paw
-            const rotationY = Math.random() * Math.PI * 2;
-            const rotationZ = Math.random() * Math.PI * 2;
-            
-            pawElements.push(
-                <mesh key={i} position={[x, y, z]} rotation={[0, rotationY, rotationZ]}>
-                    <planeGeometry args={[1, 1]} />
-                    <meshBasicMaterial 
-                        map={new THREE.TextureLoader().load('/paw-print.svg')}
-                        transparent={true}
-                        opacity={0.6}
-                        color={0xffffff}
-                    />
-                </mesh>
-            );
+            pawDataRef.current.push({
+                id: i,
+                x: (Math.random() - 0.5) * 40, // Spread across width
+                y: Math.random() * 60 + 20, // Start above scene
+                z: -8 - Math.random() * 12, // Start well behind carousel
+                speed: 0.017 + Math.random() * 0.05, // Variable falling speed (300% slower)
+                opacity: 0.3 + Math.random() * 0.4, // Variable opacity
+                rotation: Math.random() * Math.PI * 2 // Random rotation in radians
+            });
         }
-        
-        return pawElements;
     }, []);
+    
+    const paws = useMemo(() => {
+        return pawDataRef.current.map((paw) => {
+            const trailElements = [];
+            
+            // Create fading paw print trail (15 paw prints with sustained bright section)
+            for (let i = 1; i <= 15; i++) {
+                const trailY = i * 0.5; // Space paw prints 0.5 units apart (like Matrix line-by-line)
+                
+                // Create sustained bright section for first 6 paws, then fade
+                let fadeOpacity;
+                if (i <= 6) {
+                    // Sustained bright section (80% of main paw opacity)
+                    fadeOpacity = paw.opacity * 0.8;
+                } else {
+                    // Fade section (gradual fade from 80% to 0%)
+                    const fadeStart = 6;
+                    const fadeProgress = (i - fadeStart) / (15 - fadeStart);
+                    fadeOpacity = paw.opacity * 0.8 * (1 - fadeProgress);
+                }
+                
+                trailElements.push(
+                    <mesh key={`trail-${i}`} position={[0, trailY, 0]} rotation={[0, 0, paw.rotation + (Math.random() - 0.5) * 0.5]}>
+                        <planeGeometry args={[0.3, 0.3]} />
+                        <meshBasicMaterial 
+                            map={new THREE.TextureLoader().load('/paw-print.svg')}
+                            transparent={true}
+                            opacity={Math.max(0, fadeOpacity)}
+                            color={0x0BDE18} // Matrix green
+                            clippingPlanes={[clippingPlane]}
+                        />
+                    </mesh>
+                );
+            }
+            
+            return (
+                <group key={paw.id} position={[paw.x, paw.y, paw.z]}>
+                    {/* Main paw */}
+                    <mesh rotation={[0, 0, paw.rotation]}>
+                        <planeGeometry args={[0.4, 0.4]} />
+                        <meshBasicMaterial 
+                            map={new THREE.TextureLoader().load('/paw-print.svg')}
+                            transparent={true}
+                            opacity={paw.opacity}
+                            color={0x0BDE18} // Matrix green
+                            clippingPlanes={[clippingPlane]}
+                        />
+                    </mesh>
+                    
+                    {/* Fading paw print trail */}
+                    {trailElements}
+                </group>
+            );
+        });
+    }, [clippingPlane]);
     
     useFrame(() => {
         if (pawsRef.current) {
-            // Slow rotation for subtle movement
-            pawsRef.current.rotation.y += 0.0001;
+            // Update paw positions for Matrix-style falling
+            pawDataRef.current.forEach((paw) => {
+                paw.y -= paw.speed; // Fall straight down
+                
+                // Reset position when paw falls below scene
+                if (paw.y < -20) {
+                    paw.y = Math.random() * 20 + 40; // Respawn above
+                    paw.x = (Math.random() - 0.5) * 40; // New random x position
+                    paw.z = -8 - Math.random() * 12; // Ensure respawn behind carousel
+                    paw.speed = 0.017 + Math.random() * 0.05; // New random speed (300% slower)
+                    paw.opacity = 0.3 + Math.random() * 0.4; // New random opacity
+                    paw.rotation = Math.random() * Math.PI * 2; // New random rotation
+                }
+            });
+            
+            // Update group positions and material opacity
+            pawsRef.current.children.forEach((child, index) => {
+                const paw = pawDataRef.current[index];
+                if (paw && child instanceof THREE.Group) {
+                    child.position.set(paw.x, paw.y, paw.z);
+                    // Update material opacity for main paw and trail elements
+                    child.children.forEach((mesh, meshIndex) => {
+                        if (mesh instanceof THREE.Mesh && mesh.material instanceof THREE.MeshBasicMaterial) {
+                            if (meshIndex === 0) {
+                                // Main paw
+                                mesh.material.opacity = paw.opacity;
+                            } else {
+                                // Trail paw prints (sustained bright then fade)
+                                const trailIndex = meshIndex - 1;
+                                let fadeOpacity;
+                                if (trailIndex < 6) {
+                                    // Sustained bright section
+                                    fadeOpacity = paw.opacity * 0.8;
+                                } else {
+                                    // Fade section
+                                    const fadeStart = 6;
+                                    const fadeProgress = (trailIndex - fadeStart) / (15 - fadeStart);
+                                    fadeOpacity = paw.opacity * 0.8 * (1 - fadeProgress);
+                                }
+                                mesh.material.opacity = Math.max(0, fadeOpacity);
+                            }
+                        }
+                    });
+                }
+            });
         }
     });
     
