@@ -43,7 +43,7 @@ export default function CorgVerseConsole({
         </h2>
       </div>
 
-      <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+      <div className="grid items-center gap-10 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
         {/* Illustration with subtle parallax / scanlines overlay */}
         <div className="relative">
           <div className="relative overflow-hidden rounded-2xl border border-white/10 shadow-2xl">

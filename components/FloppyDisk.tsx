@@ -19,7 +19,7 @@ export function FloppyDisk({
       onClick={onInsert}
       onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && onInsert()}
       tabIndex={tabIndex}
-      className="group relative h-36 w-28 shrink-0 cursor-pointer select-none p-1 outline-none focus:ring-2 focus:ring-cyan-300"
+      className="group relative h-32 w-24 sm:h-36 sm:w-28 shrink-0 cursor-pointer select-none p-1 outline-none focus:ring-2 focus:ring-cyan-300"
       aria-label={`Insert disk: ${title}`}
     >
       {/* Shell */}
@@ -35,9 +35,9 @@ export function FloppyDisk({
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="relative">
             {/* White label background */}
-            <div className="absolute inset-0 -top-8 left-1/2 -translate-x-1/2 w-20 h-6 bg-white rounded-sm opacity-90" />
+            <div className="absolute inset-0 -top-6 sm:-top-8 left-1/2 -translate-x-1/2 w-16 sm:w-20 h-5 sm:h-6 bg-white rounded-sm opacity-90" />
             {/* Text */}
-            <span className="relative text-[10px] font-medium text-gray-800 text-center leading-tight px-1">
+            <span className="relative text-[9px] sm:text-[10px] font-medium text-gray-800 text-center leading-tight px-1">
               {title}
             </span>
           </div>

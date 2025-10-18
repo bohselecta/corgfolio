@@ -4,8 +4,8 @@ import { useMemo } from "react";
 
 export function TronFloor({ size = 40 }: { size?: number }) {
   const grid = useMemo(() => {
-    const g = new THREE.GridHelper(size, size, 0x0abbd6, 0x0abbd6);
-    (g.material as THREE.Material).opacity = 0.22;
+    const g = new THREE.GridHelper(size, size, 0x22d3ee, 0x22d3ee); // Same cyan as logo glow
+    (g.material as THREE.Material).opacity = 0.308; // Increased by 40% (0.22 * 1.4)
     (g.material as THREE.Material).transparent = true;
     (g.material as THREE.Material).depthWrite = false;
     return g;

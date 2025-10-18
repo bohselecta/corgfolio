@@ -12,7 +12,7 @@ export function DiskShelf({
   
   return (
     <div className="mt-4 overflow-x-auto pb-2">
-      <ul className="flex snap-x snap-mandatory gap-4 px-1 min-w-max">
+      <ul className="flex snap-x snap-mandatory gap-2 sm:gap-4 px-1 w-full">
         {projects.map((p, i) => (
           <li key={p.id} className="snap-start flex-shrink-0">
             <FloppyDisk title={p.title} onInsert={() => onInsert(p.id)} tabIndex={i === 0 ? 0 : -1} diskNumber={i + 1} />
