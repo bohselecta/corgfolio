@@ -4,11 +4,13 @@ import { motion } from "framer-motion";
 export function FloppyDisk({
   title,
   onInsert,
-  tabIndex = 0
+  tabIndex = 0,
+  diskNumber = 1
 }: {
   title: string;
   onInsert: () => void;
   tabIndex?: number;
+  diskNumber?: number;
 }) {
   return (
     <motion.button
@@ -24,14 +26,10 @@ export function FloppyDisk({
       <div className="h-full w-full">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img 
-          src="/floppy-disk.svg" 
-          alt="Floppy Disk" 
+          src={`/disk${diskNumber}.svg`} 
+          alt={`Floppy Disk ${diskNumber}`} 
           className="h-full w-full object-contain"
         />
-      </div>
-      {/* Label text */}
-      <div className="pointer-events-none absolute inset-x-2 top-4 bottom-[80px] flex items-center justify-center rounded-md px-1 text-center text-[10px] font-bold leading-tight text-[#0a0c12]">
-        {title}
       </div>
 
       {/* Neon edge on hover */}

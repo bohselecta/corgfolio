@@ -38,7 +38,7 @@ export default function CorgVerseConsole({
         </h2>
       </div>
 
-      <div className="grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+      <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
         {/* Illustration with subtle parallax / scanlines overlay */}
         <div className="relative">
           <div className="relative overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
@@ -47,7 +47,7 @@ export default function CorgVerseConsole({
               alt="A corgi using a floor CRT computer with a giant floppy slot — the Corg-verse console"
               width={1200}
               height={900}
-              className="h-auto w-full"
+              className="h-auto w-full max-h-[400px] object-contain"
               priority={false}
             />
             {/* scanlines */}
