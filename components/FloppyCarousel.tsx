@@ -457,7 +457,7 @@ export default function FloppyCarousel() {
             <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[var(--brand-bg)] to-transparent"></div>
             
             {/* Mobile-only Profile Picture - Below carousel */}
-            <div className="absolute inset-x-0 bottom-8 flex justify-center md:hidden">
+            <div className="absolute inset-x-0 bottom-[-200px] flex justify-center md:hidden">
                 <div className="relative rounded-full border-2 border-cyan-400/50 bg-gradient-to-br from-cyan-400/20 to-purple-500/20 backdrop-blur-sm" style={{ width: '120px', height: '120px' }}>
                     {/* Your profile picture */}
                     <img 
