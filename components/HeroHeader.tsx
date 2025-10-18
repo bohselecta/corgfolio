@@ -25,6 +25,7 @@ export default function HeroHeader() {
       <nav className="hidden gap-6 md:flex">
         <a className="text-sm text-[var(--brand-ink)]/80 hover:text-white" href="#corg-verse-console">Projects</a>
         <a className="text-sm text-[var(--brand-ink)]/80 hover:text-white" href="#about">About</a>
+        <a className="text-sm text-[var(--brand-ink)]/80 hover:text-white" href="/resume.html">Resume</a>
         <a className="text-sm text-[var(--brand-ink)]/80 hover:text-white" href="#contact">Contact</a>
       </nav>
     </header>
