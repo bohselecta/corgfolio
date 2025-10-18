@@ -30,6 +30,18 @@ export function FloppyDisk({
           alt={`Floppy Disk ${diskNumber}`} 
           className="h-full w-full object-contain"
         />
+        
+        {/* Text Label Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="relative">
+            {/* White label background */}
+            <div className="absolute inset-0 -top-8 left-1/2 -translate-x-1/2 w-20 h-6 bg-white rounded-sm opacity-90" />
+            {/* Text */}
+            <span className="relative text-[10px] font-medium text-gray-800 text-center leading-tight px-1">
+              {title}
+            </span>
+          </div>
+        </div>
       </div>
 
       {/* Neon edge on hover */}

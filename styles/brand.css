@@ -21,8 +21,29 @@ html, body {
 }
 
 .badge-pop {
-  filter: drop-shadow(0 10px 40px rgba(34, 211, 238, .25))
-          drop-shadow(0 2px 8px rgba(0, 0, 0, .45));
+  filter: drop-shadow(0 0 1px rgba(34, 211, 238, .8))
+          drop-shadow(0 0 3px rgba(34, 211, 238, .7))
+          drop-shadow(0 0 5px rgba(34, 211, 238, .6))
+          drop-shadow(0 0 7px rgba(34, 211, 238, .5))
+          drop-shadow(0 2px 8px rgba(0, 0, 0, .3));
+  animation: logo-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes logo-glow {
+  0% {
+    filter: drop-shadow(0 0 1px rgba(34, 211, 238, .8))
+            drop-shadow(0 0 3px rgba(34, 211, 238, .7))
+            drop-shadow(0 0 5px rgba(34, 211, 238, .6))
+            drop-shadow(0 0 7px rgba(34, 211, 238, .5))
+            drop-shadow(0 2px 8px rgba(0, 0, 0, .3));
+  }
+  100% {
+    filter: drop-shadow(0 0 2px rgba(34, 211, 238, 1))
+            drop-shadow(0 0 4px rgba(34, 211, 238, .9))
+            drop-shadow(0 0 6px rgba(34, 211, 238, .8))
+            drop-shadow(0 0 8px rgba(34, 211, 238, .7))
+            drop-shadow(0 2px 8px rgba(0, 0, 0, .3));
+  }
 }
 
 .card {

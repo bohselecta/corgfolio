@@ -3,6 +3,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import { DiskShelf } from "./DiskShelf";
+import { getProjectById, type ProjectData } from "@/data/projectData";
 
 type Project = { id: string; title: string; img: string; url?: string };
 
@@ -11,15 +12,19 @@ export default function CorgVerseConsole({
 }: {
   projects: Project[];
 }) {
-  const [active, setActive] = useState<Project | null>(null);
+  const [active, setActive] = useState<ProjectData | null>(null);
   const byId = useMemo(() => Object.fromEntries(projects.map(p => [p.id, p])), [projects]);
 
   function handleInsert(id: string) {
     const proj = byId[id];
     if (!proj) return;
+    // Get enhanced project data
+    const enhancedProj = getProjectById(id);
+    if (!enhancedProj) return;
+    
     // brief slot glow, then show preview
     setGlow(true);
-    setTimeout(() => setActive(proj), 280);
+    setTimeout(() => setActive(enhancedProj), 280);
   }
 
   const [glow, setGlow] = useState(false);
@@ -78,7 +83,7 @@ export default function CorgVerseConsole({
         </div>
       </div>
 
-      {/* Preview Modal */}
+      {/* Enhanced Preview Modal */}
       <AnimatePresence>
         {active && (
           <motion.div
@@ -86,38 +91,79 @@ export default function CorgVerseConsole({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            onClick={() => setActive(null)}
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.96, opacity: 0 }}
               transition={{ type: "spring", stiffness: 180, damping: 20 }}
-              className="w-[min(92vw,960px)] rounded-2xl border border-white/15 bg-white/5 p-4 shadow-2xl"
+              className="w-[min(92vw,1200px)] rounded-2xl border border-white/15 bg-white/5 p-6 shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
             >
-              <div className="mb-3 flex items-center justify-between">
-                <h4 className="text-lg font-semibold text-white">{active.title}</h4>
+              {/* Header */}
+              <div className="mb-4 flex items-center justify-between">
+                <h4 className="text-xl font-semibold text-white">{active.title}</h4>
                 <button
                   onClick={() => setActive(null)}
-                  className="rounded-lg border border-white/20 bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20"
+                  className="rounded-lg border border-white/20 bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20 transition-colors"
                 >
                   Close
                 </button>
               </div>
-              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-black/40">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={active.img} alt={active.title} className="h-full w-full object-contain" />
-              </div>
-              <div className="mt-3 flex items-center gap-3">
-                {active.url && (
-                  <a
-                    href={active.url}
-                    target="_blank"
-                    className="rounded-lg border border-white/20 bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20"
-                  >
-                    Visit project ↗
-                  </a>
-                )}
-                <span className="text-xs text-white/60">Beep boop… disk mounted.</span>
+
+              {/* Two-column layout */}
+              <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-6">
+                {/* Left side - 16:9 Image Frame */}
+                <div className="space-y-4">
+                  <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-black/40">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img 
+                      src={active.screenshotPath} 
+                      alt={active.title} 
+                      className="h-full w-full object-cover"
+                    />
+                    {/* Subtle glow effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 to-pink-500/10 pointer-events-none" />
+                  </div>
+                </div>
+
+                {/* Right side - Project Details Panel */}
+                <div className="space-y-4">
+                  {/* Description */}
+                  <div className="space-y-3">
+                    {active.description.map((paragraph, index) => (
+                      <p key={index} className="text-sm leading-relaxed text-white/80">
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="space-y-3">
+                    <a
+                      href={active.deploymentUrl}
+                      target="_blank"
+                      rel="noopener"
+                      className="block w-full rounded-xl border border-transparent bg-gradient-to-r from-[#22d3ee] to-[#ff3ea5] px-4 py-3 text-center font-semibold text-[#041018] hover:opacity-95 transition-opacity"
+                    >
+                      View Live Site ↗
+                    </a>
+                    <a
+                      href={active.githubUrl}
+                      target="_blank"
+                      rel="noopener"
+                      className="block w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-center font-semibold text-white hover:bg-white/20 transition-colors"
+                    >
+                      View Source Code
+                    </a>
+                  </div>
+
+                  {/* Status message */}
+                  <div className="pt-2">
+                    <span className="text-xs text-white/60">Beep boop… disk mounted.</span>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </motion.div>
