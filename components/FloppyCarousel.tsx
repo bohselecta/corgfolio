@@ -119,7 +119,6 @@ function createFloppyDisk(index: number) {
     const textureLoader = new THREE.TextureLoader();
     const labelTexture = textureLoader.load(`/label${index + 1}.jpg`);
     labelTexture.flipY = true; // Flip vertically
-    labelTexture.flipX = true; // Flip horizontally
     labelTexture.anisotropy = 16;
     const textMaterial = new THREE.MeshBasicMaterial({ 
         map: labelTexture,
