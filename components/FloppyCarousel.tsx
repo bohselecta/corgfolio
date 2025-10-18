@@ -1,6 +1,6 @@
 "use client";
 import * as THREE from "three";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { ScrollControls, useScroll } from "@react-three/drei";
 import { TronFloor } from "./TronFloor";
@@ -215,11 +215,84 @@ function FloppyDisk({ index, scroll }: { index: number; scroll: () => number }) 
     );
 }
 
+function InteractiveCursor() {
+    const cursorRef = useRef<THREE.Mesh>(null!);
+    const particlesRef = useRef<THREE.Group>(null!);
+    const [particles, setParticles] = useState<Array<{id: number, position: [number, number, number], opacity: number, scale: number}>>([]);
+    const particleIdRef = useRef(0);
+    
+    useFrame((state) => {
+        if (cursorRef.current) {
+            // Convert mouse position to 3D world coordinates
+            const mouse = state.mouse;
+            const x = mouse.x * 10; // Scale for 3D space
+            const y = mouse.y * 10;
+            const z = 5; // Fixed depth for cursor
+            
+            cursorRef.current.position.set(x, y, z);
+            
+            // Spawn particles when mouse moves
+            if (Math.abs(mouse.x) > 0.01 || Math.abs(mouse.y) > 0.01) {
+                const newParticle = {
+                    id: particleIdRef.current++,
+                    position: [x + (Math.random() - 0.5) * 2, y + (Math.random() - 0.5) * 2, z + (Math.random() - 0.5) * 2] as [number, number, number],
+                    opacity: 1,
+                    scale: 0.5 + Math.random() * 0.5
+                };
+                
+                setParticles(prev => [...prev.slice(-50), newParticle]); // Keep only last 50 particles
+            }
+        }
+        
+        // Update particle animations
+        setParticles(prev => 
+            prev.map(particle => ({
+                ...particle,
+                opacity: Math.max(0, particle.opacity - 0.02), // Decay over time
+                scale: particle.scale * 0.98 // Slight shrink
+            })).filter(particle => particle.opacity > 0.1) // Remove faded particles
+        );
+    });
+    
+    return (
+        <>
+            {/* Interactive Cursor */}
+            <mesh ref={cursorRef}>
+                <circleGeometry args={[0.5, 32]} />
+                <meshBasicMaterial 
+                    color={0xffffff} 
+                    transparent={true} 
+                    opacity={0.3}
+                />
+            </mesh>
+            
+            {/* Particle System */}
+            <group ref={particlesRef}>
+                {particles.map(particle => (
+                    <mesh 
+                        key={particle.id} 
+                        position={particle.position}
+                        scale={[particle.scale, particle.scale, particle.scale]}
+                    >
+                        <planeGeometry args={[1, 1]} />
+                        <meshBasicMaterial 
+                            map={new THREE.TextureLoader().load('/paw-print.svg')}
+                            transparent={true}
+                            opacity={particle.opacity}
+                            color={0xffffff}
+                        />
+                    </mesh>
+                ))}
+            </group>
+        </>
+    );
+}
+
 function PawField() {
     const pawsRef = useRef<THREE.Group>(null!);
     
     const paws = useMemo(() => {
-        const pawCount = 200;
+        const pawCount = 400;
         const pawElements = [];
         
         for (let i = 0; i < pawCount; i++) {
@@ -270,6 +343,9 @@ function Scene() {
         <>
             {/* Paw Field */}
             <PawField />
+            
+            {/* Interactive Cursor */}
+            <InteractiveCursor />
             
             {/* Environment */}
             <fog attach="fog" args={["#000011", 15, 50]} />
