@@ -119,7 +119,6 @@ function createFloppyDisk(index: number) {
     const textureLoader = new THREE.TextureLoader();
     const labelTexture = textureLoader.load('/blank-floppy-label.png');
     labelTexture.flipY = false; // Reset texture flips
-    labelTexture.flipX = true; // Flip horizontally
     labelTexture.anisotropy = 16;
     const textMaterial = new THREE.MeshBasicMaterial({ 
         map: labelTexture,
@@ -249,7 +248,7 @@ function StarField() {
         });
     }, []);
     
-    useFrame((state) => {
+    useFrame(() => {
         if (starsRef.current) {
             // Slow rotation for subtle movement
             starsRef.current.rotation.y += 0.0001;
