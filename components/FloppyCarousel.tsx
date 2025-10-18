@@ -215,47 +215,51 @@ function FloppyDisk({ index, scroll }: { index: number; scroll: () => number }) 
     );
 }
 
-function StarField() {
-    const starsRef = useRef<THREE.Points>(null!);
+function PawField() {
+    const pawsRef = useRef<THREE.Group>(null!);
     
-    const starsGeometry = useMemo(() => {
-        const geometry = new THREE.BufferGeometry();
-        const starCount = 2000;
-        const positions = new Float32Array(starCount * 3);
+    const paws = useMemo(() => {
+        const pawCount = 200;
+        const pawElements = [];
         
-        for (let i = 0; i < starCount; i++) {
-            // Create stars in a large sphere around the scene
+        for (let i = 0; i < pawCount; i++) {
+            // Create paws in a large sphere around the scene
             const radius = 20 + Math.random() * 30;
             const theta = Math.random() * Math.PI * 2;
             const phi = Math.acos(2 * Math.random() - 1);
             
-            positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
-            positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
-            positions[i * 3 + 2] = radius * Math.cos(phi);
+            const x = radius * Math.sin(phi) * Math.cos(theta);
+            const y = radius * Math.sin(phi) * Math.sin(theta);
+            const z = radius * Math.cos(phi);
+            
+            // Random rotation for each paw
+            const rotationY = Math.random() * Math.PI * 2;
+            const rotationZ = Math.random() * Math.PI * 2;
+            
+            pawElements.push(
+                <mesh key={i} position={[x, y, z]} rotation={[0, rotationY, rotationZ]}>
+                    <planeGeometry args={[1, 1]} />
+                    <meshBasicMaterial 
+                        map={new THREE.TextureLoader().load('/paw-print.svg')}
+                        transparent={true}
+                        opacity={0.6}
+                        color={0xffffff}
+                    />
+                </mesh>
+            );
         }
         
-        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        return geometry;
-    }, []);
-    
-    const starsMaterial = useMemo(() => {
-        return new THREE.PointsMaterial({
-            color: 0xffffff,
-            size: 2.0,
-            sizeAttenuation: false,
-            transparent: true,
-            opacity: 1.0
-        });
+        return pawElements;
     }, []);
     
     useFrame(() => {
-        if (starsRef.current) {
+        if (pawsRef.current) {
             // Slow rotation for subtle movement
-            starsRef.current.rotation.y += 0.0001;
+            pawsRef.current.rotation.y += 0.0001;
         }
     });
     
-    return <points ref={starsRef} geometry={starsGeometry} material={starsMaterial} />;
+    return <group ref={pawsRef}>{paws}</group>;
 }
 
 function Scene() {
@@ -264,8 +268,8 @@ function Scene() {
     
     return (
         <>
-            {/* Starfield */}
-            <StarField />
+            {/* Paw Field */}
+            <PawField />
             
             {/* Environment */}
             <fog attach="fog" args={["#000011", 15, 50]} />
