@@ -313,7 +313,9 @@ function Scene() {
             </mesh>
             
             {/* TRON Floor */}
-            <TronFloor size={36} position={[0, -2, 0]} />
+            <group position={[0, -2, 0]}>
+                <TronFloor size={36} />
+            </group>
             
             {/* Floppy disks */}
             {Array.from({ length: 5 }, (_, i) => (
