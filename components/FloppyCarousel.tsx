@@ -150,7 +150,7 @@ function FloppyDisk({ index, scroll }: { index: number; scroll: () => number }) 
         if (!meshRef.current) return;
         
         const progress = scroll();
-        const targetIndex = progress * 6; // Maps to disk 0-6 for 7 disks
+        const targetIndex = progress * 8; // Maps to disk 0-8 for 9 disks
         const distanceFromCenter = index - targetIndex;
         const absDistance = Math.abs(distanceFromCenter);
         
@@ -403,7 +403,7 @@ function Scene() {
             </group>
             
             {/* Floppy disks */}
-            {Array.from({ length: 7 }, (_, i) => (
+            {Array.from({ length: 9 }, (_, i) => (
                 <FloppyDisk key={i} index={i} scroll={scroll} />
             ))}
         </>
