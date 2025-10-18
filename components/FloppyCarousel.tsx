@@ -439,8 +439,8 @@ export default function FloppyCarousel() {
                   Scroll to navigate through the floppy disk collection.
                 </p>
                 
-                {/* Personal Picture Circle */}
-                <div className="mt-8 flex justify-center">
+                {/* Personal Picture Circle - Hidden on mobile */}
+                <div className="mt-8 flex justify-center hidden md:flex">
                     <div className="relative rounded-full border-2 border-cyan-400/50 bg-gradient-to-br from-cyan-400/20 to-purple-500/20 backdrop-blur-sm" style={{ width: '175px', height: '175px' }}>
                         {/* Your profile picture */}
                         <img 
@@ -455,6 +455,18 @@ export default function FloppyCarousel() {
             {/* subtle gradient top/bottom to blend */}
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[var(--brand-bg)] to-transparent"></div>
             <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[var(--brand-bg)] to-transparent"></div>
+            
+            {/* Mobile-only Profile Picture - Below carousel */}
+            <div className="absolute inset-x-0 bottom-8 flex justify-center md:hidden">
+                <div className="relative rounded-full border-2 border-cyan-400/50 bg-gradient-to-br from-cyan-400/20 to-purple-500/20 backdrop-blur-sm" style={{ width: '120px', height: '120px' }}>
+                    {/* Your profile picture */}
+                    <img 
+                        src="/profile-pic.jpg" 
+                        alt="Profile" 
+                        className="absolute inset-0 rounded-full object-cover"
+                    />
+                </div>
+            </div>
         </div>
     );
 }
