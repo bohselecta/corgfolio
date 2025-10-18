@@ -1,6 +1,6 @@
 "use client";
 import * as THREE from "three";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { ScrollControls, useScroll } from "@react-three/drei";
 import { TronFloor } from "./TronFloor";
@@ -215,76 +215,83 @@ function FloppyDisk({ index, scroll }: { index: number; scroll: () => number }) 
     );
 }
 
-function InteractiveCursor() {
-    const cursorRef = useRef<THREE.Mesh>(null!);
-    const particlesRef = useRef<THREE.Group>(null!);
-    const [particles, setParticles] = useState<Array<{id: number, position: [number, number, number], opacity: number, scale: number}>>([]);
+function InteractiveCursorOverlay() {
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [particles, setParticles] = useState<Array<{id: number, x: number, y: number, opacity: number, scale: number}>>([]);
     const particleIdRef = useRef(0);
     
-    useFrame((state) => {
-        if (cursorRef.current) {
-            // Convert mouse position to 3D world coordinates
-            const mouse = state.mouse;
-            const x = mouse.x * 10; // Scale for 3D space
-            const y = mouse.y * 10;
-            const z = 5; // Fixed depth for cursor
-            
-            cursorRef.current.position.set(x, y, z);
-            
-            // Spawn particles when mouse moves
-            if (Math.abs(mouse.x) > 0.01 || Math.abs(mouse.y) > 0.01) {
-                const newParticle = {
-                    id: particleIdRef.current++,
-                    position: [x + (Math.random() - 0.5) * 2, y + (Math.random() - 0.5) * 2, z + (Math.random() - 0.5) * 2] as [number, number, number],
-                    opacity: 1,
-                    scale: 0.5 + Math.random() * 0.5
-                };
-                
-                setParticles(prev => [...prev.slice(-50), newParticle]); // Keep only last 50 particles
-            }
-        }
+    // Track mouse movement
+    const handleMouseMove = (e: React.MouseEvent) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
         
-        // Update particle animations
-        setParticles(prev => 
-            prev.map(particle => ({
-                ...particle,
-                opacity: Math.max(0, particle.opacity - 0.02), // Decay over time
-                scale: particle.scale * 0.98 // Slight shrink
-            })).filter(particle => particle.opacity > 0.1) // Remove faded particles
-        );
-    });
+        setMousePosition({ x, y });
+        
+        // Spawn particles when mouse moves
+        if (Math.abs(e.movementX) > 1 || Math.abs(e.movementY) > 1) {
+            const newParticle = {
+                id: particleIdRef.current++,
+                x: x + (Math.random() - 0.5) * 20,
+                y: y + (Math.random() - 0.5) * 20,
+                opacity: 1,
+                scale: 0.5 + Math.random() * 0.5
+            };
+            
+            setParticles(prev => [...prev.slice(-50), newParticle]); // Keep only last 50 particles
+        }
+    };
+    
+    // Animate particles
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setParticles(prev => 
+                prev.map(particle => ({
+                    ...particle,
+                    opacity: Math.max(0, particle.opacity - 0.02), // Decay over time
+                    scale: particle.scale * 0.98 // Slight shrink
+                })).filter(particle => particle.opacity > 0.1) // Remove faded particles
+            );
+        }, 16); // ~60fps
+        
+        return () => clearInterval(interval);
+    }, []);
     
     return (
-        <>
-            {/* Interactive Cursor */}
-            <mesh ref={cursorRef}>
-                <circleGeometry args={[0.5, 32]} />
-                <meshBasicMaterial 
-                    color={0xffffff} 
-                    transparent={true} 
-                    opacity={0.3}
-                />
-            </mesh>
+        <div 
+            className="absolute inset-0 pointer-events-none z-10"
+            onMouseMove={handleMouseMove}
+        >
+            {/* Cursor Circle */}
+            <div 
+                className="absolute w-2.5 h-2.5 bg-white rounded-full opacity-30 pointer-events-none"
+                style={{
+                    left: mousePosition.x - 5,
+                    top: mousePosition.y - 5,
+                    transform: 'translate(-50%, -50%)'
+                }}
+            />
             
             {/* Particle System */}
-            <group ref={particlesRef}>
-                {particles.map(particle => (
-                    <mesh 
-                        key={particle.id} 
-                        position={particle.position}
-                        scale={[particle.scale, particle.scale, particle.scale]}
-                    >
-                        <planeGeometry args={[1, 1]} />
-                        <meshBasicMaterial 
-                            map={new THREE.TextureLoader().load('/paw-print.svg')}
-                            transparent={true}
-                            opacity={particle.opacity}
-                            color={0xffffff}
-                        />
-                    </mesh>
-                ))}
-            </group>
-        </>
+            {particles.map(particle => (
+                <div
+                    key={particle.id}
+                    className="absolute pointer-events-none"
+                    style={{
+                        left: particle.x,
+                        top: particle.y,
+                        transform: `translate(-50%, -50%) scale(${particle.scale})`,
+                        opacity: particle.opacity
+                    }}
+                >
+                    <img 
+                        src="/paw-print.svg" 
+                        alt="Paw print particle"
+                        className="w-4 h-4"
+                    />
+                </div>
+            ))}
+        </div>
     );
 }
 
@@ -343,9 +350,6 @@ function Scene() {
         <>
             {/* Paw Field */}
             <PawField />
-            
-            {/* Interactive Cursor */}
-            <InteractiveCursor />
             
             {/* Environment */}
             <fog attach="fog" args={["#000011", 15, 50]} />
@@ -422,6 +426,9 @@ export default function FloppyCarousel() {
                     <Scene />
                 </ScrollControls>
             </Canvas>
+
+            {/* Interactive Cursor Overlay */}
+            <InteractiveCursorOverlay />
 
             {/* CTA overlay */}
             <div className="pointer-events-none absolute inset-x-0 top-28 z-10 mx-auto max-w-3xl px-6 text-center">
