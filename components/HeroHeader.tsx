@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import BackgroundAudio from "./BackgroundAudio";
 
 export default function HeroHeader() {
   return (
@@ -22,12 +23,17 @@ export default function HeroHeader() {
         </div>
       </div>
 
-      <nav className="hidden gap-6 md:flex">
-        <a className="text-sm text-[var(--brand-ink)]/80 hover:text-white" href="#corg-verse-console">Projects</a>
-        <a className="text-sm text-[var(--brand-ink)]/80 hover:text-white" href="#about">About</a>
-        <a className="text-sm text-[var(--brand-ink)]/80 hover:text-white" href="/resume.html">Resume</a>
-        <a className="text-sm text-[var(--brand-ink)]/80 hover:text-white" href="#contact">Contact</a>
-      </nav>
+      <div className="flex items-center gap-4">
+        <nav className="hidden gap-6 md:flex">
+          <a className="text-sm text-[var(--brand-ink)]/80 hover:text-white" href="#corg-verse-console">Projects</a>
+          <a className="text-sm text-[var(--brand-ink)]/80 hover:text-white" href="#about">About</a>
+          <a className="text-sm text-[var(--brand-ink)]/80 hover:text-white" href="/resume.html">Resume</a>
+          <a className="text-sm text-[var(--brand-ink)]/80 hover:text-white" href="#contact">Contact</a>
+        </nav>
+        
+        {/* Audio Toggle */}
+        <BackgroundAudio />
+      </div>
     </header>
   );
 }
