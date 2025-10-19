@@ -1,5 +1,5 @@
 import { Project } from '@/types/portfolio/project';
-import projectsData from '@/data/projects.json';
+import projectsData from '../../data/projects.json';
 
 interface ProjectData {
   id: number;
