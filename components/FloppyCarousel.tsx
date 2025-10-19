@@ -1,33 +1,21 @@
 "use client";
 import * as THREE from "three";
 import { useMemo, useRef, useState, useEffect } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useFrame, useThree, ThreeEvent } from "@react-three/fiber";
 import { ScrollControls, useScroll } from "@react-three/drei";
 import { TronFloor } from "./TronFloor";
 import { createLabelTexture } from "@/utils/createLabelTexture";
 
-// Project data for each floppy disk
 const projects = [
-    { title: "PROJECT_001", description: "Web Application Design", tech: "React • Node.js • MongoDB", color: 0x00ffff, url: "https://project1.com", github: "github.com/user/project1" },
-    { title: "PROJECT_002", description: "Brand Identity System", tech: "Illustrator • After Effects", color: 0xff00ff, url: "https://project2.com", github: "github.com/user/project2" },
-    { title: "PROJECT_003", description: "3D Product Visualization", tech: "Blender • Three.js • WebGL", color: 0x00ff00, url: "https://project3.com", github: "github.com/user/project3" },
-    { title: "PROJECT_004", description: "Motion Graphics Reel", tech: "After Effects • Cinema 4D", color: 0xffff00 },
-    { title: "PROJECT_005", description: "Interactive Installation", tech: "TouchDesigner • Arduino", color: 0xff6600 },
-    { title: "PROJECT_006", description: "E-commerce Platform", tech: "Vue.js • Stripe • AWS", color: 0x00ffff },
-    { title: "PROJECT_007", description: "Animated Short Film", tech: "Maya • Arnold • Nuke", color: 0xff0066 },
-    { title: "PROJECT_008", description: "Mobile App UI/UX", tech: "Figma • Swift • Kotlin", color: 0x6600ff },
-    { title: "PROJECT_009", description: "Generative Art Series", tech: "p5.js • WebGL • GLSL", color: 0x00ff88 },
-    { title: "PROJECT_010", description: "VR Experience", tech: "Unity • Oculus SDK • C#", color: 0xff8800 },
-    { title: "PROJECT_011", description: "Data Visualization", tech: "D3.js • Python • Pandas", color: 0x0088ff },
-    { title: "PROJECT_012", description: "Game Character Design", tech: "ZBrush • Substance Painter", color: 0xff00aa },
-    { title: "PROJECT_013", description: "Typography System", tech: "Glyphs • InDesign", color: 0xaaff00 },
-    { title: "PROJECT_014", description: "AR Filter Collection", tech: "Spark AR • Lens Studio", color: 0x00aaff },
-    { title: "PROJECT_015", description: "Sound Visualization", tech: "Web Audio API • GLSL", color: 0xff66ff },
-    { title: "PROJECT_016", description: "Particle System", tech: "GLSL • WebGL • Three.js", color: 0x66ff00 },
-    { title: "PROJECT_017", description: "Corporate Website", tech: "Next.js • Tailwind • Vercel", color: 0xff6666 },
-    { title: "PROJECT_018", description: "Procedural Animation", tech: "Houdini • Python • USD", color: 0x6666ff },
-    { title: "PROJECT_019", description: "Real-time Shader", tech: "GLSL • ShaderToy • WebGL", color: 0x66ffff },
-    { title: "PROJECT_020", description: "Portfolio Website", tech: "Three.js • GSAP • WebGL", color: 0xffff66 }
+    { title: "Neon Studio", description: "A modern web application showcasing neon-themed design elements and interactive animations.", tech: "React • Three.js • Tailwind CSS", color: 65535, url: "https://neon-studio.example.com", github: "https://github.com/hayden/neon-studio" },
+    { title: "XR Landing", description: "An immersive landing page for XR experiences featuring spatial design and interactive elements.", tech: "Next.js • WebXR • Three.js", color: 16711935, url: "https://xr-landing.example.com", github: "https://github.com/hayden/xr-landing" },
+    { title: "Gummy Brand", description: "Complete brand identity system for a confectionery company with playful animations and vibrant colors.", tech: "Figma • After Effects • Illustrator", color: 65280, url: "https://gummy-brand.example.com", github: "https://github.com/hayden/gummy-brand" },
+    { title: "AI Chat Interface", description: "A sleek chat interface powered by AI with real-time message streaming and voice input capabilities.", tech: "React • Node.js • OpenAI API", color: 16776960, url: "https://ai-chat.example.com", github: "https://github.com/hayden/ai-chat" },
+    { title: "Data Visualization", description: "Interactive data visualization dashboard with real-time updates and customizable chart types.", tech: "D3.js • WebGL • Python", color: 16737792, url: "https://data-viz.example.com", github: "https://github.com/hayden/data-viz" },
+    { title: "Mobile App Design", description: "Complete mobile app design system with custom components and micro-interactions.", tech: "Figma • Swift • Kotlin", color: 65535, url: "https://mobile-app.example.com", github: "https://github.com/hayden/mobile-app" },
+    { title: "Web Platform", description: "A comprehensive web platform with user authentication, dashboard, and API integration.", tech: "Next.js • TypeScript • PostgreSQL", color: 16711782, url: "https://web-platform.example.com", github: "https://github.com/hayden/web-platform" },
+    { title: "Creative Tools", description: "A suite of creative tools for designers including color palette generators and asset libraries.", tech: "Vue.js • Node.js • MongoDB", color: 6684927, url: "https://creative-tools.example.com", github: "https://github.com/hayden/creative-tools" },
+    { title: "Portfolio Site", description: "A modern portfolio website with 3D animations and interactive elements.", tech: "Three.js • GSAP • WebGL", color: 65416, url: "https://portfolio-site.example.com", github: "https://github.com/hayden/portfolio-site" }
 ];
 
 function createFloppyDisk(index: number) {
@@ -133,6 +121,8 @@ function FloppyDisk({ index, scroll }: { index: number; scroll: () => number }) 
     const meshRef = useRef<THREE.Group>(null!);
     const diskGeometry = useMemo(() => createFloppyDisk(index), [index]);
     const { gl } = useThree();
+    const [isFlashing, setIsFlashing] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
     
     // Create proper label texture and material
     const labelTexture = useMemo(() => createLabelTexture(`/label${index + 1}.jpg`, gl), [index, gl]);
@@ -142,8 +132,40 @@ function FloppyDisk({ index, scroll }: { index: number; scroll: () => number }) 
         toneMapped: false,     // Critical for color accuracy
         fog: false            // Critical to ignore scene fog
     }), [labelTexture]);
+
+    // Create flash outline geometry for the entire disk body
+    const flashOutlineGeometry = useMemo(() => {
+        const bodyGeometry = new THREE.BoxGeometry(2.0, 2.1, 0.1, 4, 4, 1);
+        return new THREE.EdgesGeometry(bodyGeometry);
+    }, []);
+
+    // Click handler
+    const handleClick = (event: ThreeEvent<MouseEvent>) => {
+        event.stopPropagation();
+        const project = projects[index];
+        if (project?.url) {
+            // Trigger flash animation
+            setIsFlashing(true);
+            setTimeout(() => setIsFlashing(false), 400);
+            
+            // Open URL in new tab
+            window.open(project.url, '_blank');
+        }
+    };
+
+    // Pointer event handlers
+    const handlePointerOver = () => setIsHovered(true);
+    const handlePointerOut = () => setIsHovered(false);
+
+    // Create flash material
+    const flashMaterial = useMemo(() => new THREE.LineBasicMaterial({
+        color: 0x00ffff, // Start with cyan
+        transparent: true,
+        opacity: 0,
+        linewidth: 3
+    }), []);
     
-    useFrame(() => {
+    useFrame((state) => {
         if (!meshRef.current) return;
         
         const progress = scroll();
@@ -200,16 +222,40 @@ function FloppyDisk({ index, scroll }: { index: number; scroll: () => number }) 
                 meshRef.current.userData.edges.material.opacity = Math.max(0.2, 0.6 - absDistance * 0.2);
             }
         }
+
+        // Flash animation
+        if (isFlashing) {
+            const time = state.clock.elapsedTime;
+            const flashProgress = (time % 0.4) / 0.4; // 400ms cycle
+            
+            // Animate opacity (fade in then out)
+            const opacity = Math.sin(flashProgress * Math.PI);
+            flashMaterial.opacity = opacity * 0.8;
+            
+            // Animate color from cyan to pink
+            const hue = flashProgress * 0.5; // 0 to 0.5 (cyan to pink)
+            flashMaterial.color.setHSL(hue, 1, 0.5);
+        } else {
+            flashMaterial.opacity = 0;
+        }
     });
     
     return (
-        <group ref={meshRef}>
+        <group 
+            ref={meshRef}
+            onClick={handleClick}
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
+            style={{ cursor: isHovered ? 'pointer' : 'default' }}
+        >
             {diskGeometry && <primitive object={diskGeometry} />}
             {/* Add the label as a separate mesh with proper material */}
             <mesh position={[0, 0.4, 0.052]} rotation={[0, 0, 0]} renderOrder={999}>
                 <planeGeometry args={[1.39, 1.1]} />
                 <primitive object={labelMaterial} attach="material" />
             </mesh>
+            {/* Flash outline */}
+            <lineSegments geometry={flashOutlineGeometry} material={flashMaterial} renderOrder={1000} />
         </group>
     );
 }

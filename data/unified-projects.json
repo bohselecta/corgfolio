@@ -1,0 +1,121 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "diskNumber": 1,
+      "title": "Neon Studio",
+      "liveUrl": "https://neon-studio.example.com",
+      "githubUrl": "https://github.com/hayden/neon-studio",
+      "description": "A modern web application showcasing neon-themed design elements and interactive animations. Built with React and Three.js for immersive 3D experiences.",
+      "framework": "React • Three.js • Tailwind CSS",
+      "category": "web",
+      "featured": true,
+      "screenshotPath": "/screenshots/screenshot1.jpg",
+      "labelPath": "/label1.jpg"
+    },
+    {
+      "id": 2,
+      "diskNumber": 2,
+      "title": "XR Landing",
+      "liveUrl": "https://xr-landing.example.com",
+      "githubUrl": "https://github.com/hayden/xr-landing",
+      "description": "An immersive landing page for XR experiences featuring spatial design and interactive elements. Optimized for both desktop and mobile VR/AR viewing experiences.",
+      "framework": "Next.js • WebXR • Three.js",
+      "category": "web",
+      "featured": true,
+      "screenshotPath": "/screenshots/screenshot2.jpg",
+      "labelPath": "/label2.jpg"
+    },
+    {
+      "id": 3,
+      "diskNumber": 3,
+      "title": "Gummy Brand",
+      "liveUrl": "https://gummy-brand.example.com",
+      "githubUrl": "https://github.com/hayden/gummy-brand",
+      "description": "Complete brand identity system for a confectionery company with playful animations and vibrant colors. Includes logo design, packaging concepts, and digital marketing materials.",
+      "framework": "Figma • After Effects • Illustrator",
+      "category": "creative",
+      "featured": true,
+      "screenshotPath": "/screenshots/screenshot3.jpg",
+      "labelPath": "/label3.jpg"
+    },
+    {
+      "id": 4,
+      "diskNumber": 4,
+      "title": "AI Chat Interface",
+      "liveUrl": "https://ai-chat.example.com",
+      "githubUrl": "https://github.com/hayden/ai-chat",
+      "description": "A sleek chat interface powered by AI with real-time message streaming and voice input capabilities. Features custom animations and responsive design for seamless user experience.",
+      "framework": "React • Node.js • OpenAI API",
+      "category": "ai",
+      "featured": false,
+      "screenshotPath": "/screenshots/screenshot4.jpg",
+      "labelPath": "/label4.jpg"
+    },
+    {
+      "id": 5,
+      "diskNumber": 5,
+      "title": "Data Visualization",
+      "liveUrl": "https://data-viz.example.com",
+      "githubUrl": "https://github.com/hayden/data-viz",
+      "description": "Interactive data visualization dashboard with real-time updates and customizable chart types. Built with D3.js and WebGL for smooth animations and large dataset handling.",
+      "framework": "D3.js • WebGL • Python",
+      "category": "data-science",
+      "featured": false,
+      "screenshotPath": "/screenshots/screenshot5.jpg",
+      "labelPath": "/label5.jpg"
+    },
+    {
+      "id": 6,
+      "diskNumber": 6,
+      "title": "Mobile App Design",
+      "liveUrl": "https://mobile-app.example.com",
+      "githubUrl": "https://github.com/hayden/mobile-app",
+      "description": "Complete mobile app design system with custom components and micro-interactions. Includes user flow diagrams, wireframes, and high-fidelity prototypes.",
+      "framework": "Figma • Swift • Kotlin",
+      "category": "creative",
+      "featured": false,
+      "screenshotPath": "/screenshots/screenshot6.jpg",
+      "labelPath": "/label6.jpg"
+    },
+    {
+      "id": 7,
+      "diskNumber": 7,
+      "title": "Web Platform",
+      "liveUrl": "https://web-platform.example.com",
+      "githubUrl": "https://github.com/hayden/web-platform",
+      "description": "A comprehensive web platform with user authentication, dashboard, and API integration. Built with Next.js and TypeScript for scalability and maintainability.",
+      "framework": "Next.js • TypeScript • PostgreSQL",
+      "category": "web",
+      "featured": false,
+      "screenshotPath": "/screenshots/screenshot7.jpg",
+      "labelPath": "/label7.jpg"
+    },
+    {
+      "id": 8,
+      "diskNumber": 8,
+      "title": "Creative Tools",
+      "liveUrl": "https://creative-tools.example.com",
+      "githubUrl": "https://github.com/hayden/creative-tools",
+      "description": "A suite of creative tools for designers including color palette generators and asset libraries. Features collaborative workspaces and cloud synchronization.",
+      "framework": "Vue.js • Node.js • MongoDB",
+      "category": "creative",
+      "featured": false,
+      "screenshotPath": "/screenshots/screenshot8.jpg",
+      "labelPath": "/label8.jpg"
+    },
+    {
+      "id": 9,
+      "diskNumber": 9,
+      "title": "Portfolio Site",
+      "liveUrl": "https://portfolio-site.example.com",
+      "githubUrl": "https://github.com/hayden/portfolio-site",
+      "description": "A modern portfolio website with 3D animations and interactive elements. Showcases projects with smooth transitions and responsive design.",
+      "framework": "Three.js • GSAP • WebGL",
+      "category": "web",
+      "featured": false,
+      "screenshotPath": "/screenshots/screenshot9.jpg",
+      "labelPath": "/label9.jpg"
+    }
+  ]
+}

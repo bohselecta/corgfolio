@@ -42,7 +42,7 @@ export const projectData: ProjectData[] = [
     screenshotPath: "/screenshots/screenshot3.jpg"
   },
   {
-    id: "ai-chat",
+    id: "ai-chat-interface",
     title: "AI Chat Interface",
     description: [
       "A sleek chat interface powered by AI with real-time message streaming and voice input capabilities.",
@@ -53,7 +53,7 @@ export const projectData: ProjectData[] = [
     screenshotPath: "/screenshots/screenshot4.jpg"
   },
   {
-    id: "data-viz",
+    id: "data-visualization",
     title: "Data Visualization",
     description: [
       "Interactive data visualization dashboard with real-time updates and customizable chart types.",
@@ -64,7 +64,7 @@ export const projectData: ProjectData[] = [
     screenshotPath: "/screenshots/screenshot5.jpg"
   },
   {
-    id: "mobile-app",
+    id: "mobile-app-design",
     title: "Mobile App Design",
     description: [
       "Complete mobile app design system with custom components and micro-interactions.",
