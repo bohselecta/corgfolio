@@ -1,7 +1,5 @@
 "use client";
-import Link from "next/link";
 import Image from "next/image";
-import { SplashCursor } from "@/components/SplashCursor";
 import Card from "@/components/Card";
 
 export default function SplashPage() {
@@ -20,8 +18,6 @@ export default function SplashPage() {
         {/* Subtle radial gradient overlay for better text readability */}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(1200px_600px_at_50%_-10%,rgba(0,0,0,0.25),transparent_60%)]" />
       </div>
-      
-      <SplashCursor />
       
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
         {/* Header */}

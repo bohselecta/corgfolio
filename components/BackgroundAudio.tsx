@@ -3,7 +3,6 @@ import { useState, useRef, useEffect } from "react";
 
 export default function BackgroundAudio() {
   const [isMuted, setIsMuted] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -14,7 +13,6 @@ export default function BackgroundAudio() {
     const playAudio = async () => {
       try {
         await audio.play();
-        setIsPlaying(true);
       } catch (error) {
         console.log("Auto-play prevented by browser:", error);
         // Browser prevented auto-play, user will need to interact first
@@ -24,9 +22,9 @@ export default function BackgroundAudio() {
     playAudio();
 
     // Handle audio events
-    const handlePlay = () => setIsPlaying(true);
-    const handlePause = () => setIsPlaying(false);
-    const handleEnded = () => setIsPlaying(false);
+    const handlePlay = () => {};
+    const handlePause = () => {};
+    const handleEnded = () => {};
 
     audio.addEventListener('play', handlePlay);
     audio.addEventListener('pause', handlePause);

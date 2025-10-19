@@ -19,12 +19,6 @@ export default function FilterButtons({ projects }: FilterButtonsProps) {
     { key: 'creative', label: 'Creative Tools' },
   ];
 
-  const filteredProjects = filter === 'all' 
-    ? projects 
-    : filter === 'featured'
-    ? projects.filter(p => p.featured)
-    : projects.filter(p => p.category === filter);
-
   // Update the projects grid when filter changes
   React.useEffect(() => {
     const projectsGrid = document.getElementById('projects-grid');

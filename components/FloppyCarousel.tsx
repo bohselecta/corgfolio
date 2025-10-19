@@ -122,7 +122,6 @@ function FloppyDisk({ index, scroll }: { index: number; scroll: () => number }) 
     const diskGeometry = useMemo(() => createFloppyDisk(index), [index]);
     const { gl } = useThree();
     const [isFlashing, setIsFlashing] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
     
     // Create proper label texture and material
     const labelTexture = useMemo(() => createLabelTexture(`/label${index + 1}.jpg`, gl), [index, gl]);
@@ -154,8 +153,8 @@ function FloppyDisk({ index, scroll }: { index: number; scroll: () => number }) 
     };
 
     // Pointer event handlers
-    const handlePointerOver = () => setIsHovered(true);
-    const handlePointerOut = () => setIsHovered(false);
+    const handlePointerOver = () => {};
+    const handlePointerOut = () => {};
 
     // Create flash material
     const flashMaterial = useMemo(() => new THREE.LineBasicMaterial({
@@ -241,12 +240,11 @@ function FloppyDisk({ index, scroll }: { index: number; scroll: () => number }) 
     });
     
     return (
-        <group 
+        <group
             ref={meshRef}
             onClick={handleClick}
             onPointerOver={handlePointerOver}
             onPointerOut={handlePointerOut}
-            style={{ cursor: isHovered ? 'pointer' : 'default' }}
         >
             {diskGeometry && <primitive object={diskGeometry} />}
             {/* Add the label as a separate mesh with proper material */}
