@@ -40,6 +40,17 @@ export default function SplashPage() {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             
+            {/* Preview Image at Top */}
+            <div className="relative z-10 mb-6 w-full aspect-video rounded-lg overflow-hidden">
+              <Image
+                src="/previews/neon-studio.jpg"
+                alt="Fun site preview"
+                width={400}
+                height={225}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            
             <div className="relative z-10">
               <div className="flex items-center mb-6">
                 <div className="w-12 h-12 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-lg flex items-center justify-center mr-4">
@@ -57,17 +68,6 @@ export default function SplashPage() {
                 Enter the Corg-verse →
               </div>
             </div>
-            
-            {/* Preview Image */}
-            <div className="absolute top-4 right-4 w-24 h-24 rounded-lg overflow-hidden opacity-20 group-hover:opacity-30 transition-opacity">
-              <Image
-                src="/previews/neon-studio.jpg"
-                alt="Fun site preview"
-                width={96}
-                height={96}
-                className="w-full h-full object-cover"
-              />
-            </div>
           </Link>
 
           {/* Serious Site (Portfolio) */}
@@ -76,6 +76,17 @@ export default function SplashPage() {
             className="group relative bg-gradient-to-br from-slate-800/20 to-slate-700/20 backdrop-blur-sm rounded-2xl border border-slate-600/30 hover:border-slate-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-slate-500/20 p-8"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-slate-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            
+            {/* Preview Image at Top */}
+            <div className="relative z-10 mb-6 w-full aspect-video rounded-lg overflow-hidden">
+              <Image
+                src="/previews/xr-landing.jpg"
+                alt="Professional site preview"
+                width={400}
+                height={225}
+                className="w-full h-full object-cover"
+              />
+            </div>
             
             <div className="relative z-10">
               <div className="flex items-center mb-6">
@@ -93,17 +104,6 @@ export default function SplashPage() {
               <div className="flex items-center text-slate-400 font-medium group-hover:text-slate-300 transition-colors">
                 View Portfolio →
               </div>
-            </div>
-            
-            {/* Preview Image */}
-            <div className="absolute top-4 right-4 w-24 h-24 rounded-lg overflow-hidden opacity-20 group-hover:opacity-30 transition-opacity">
-              <Image
-                src="/previews/xr-landing.jpg"
-                alt="Professional site preview"
-                width={96}
-                height={96}
-                className="w-full h-full object-cover"
-              />
             </div>
           </Link>
         </div>
