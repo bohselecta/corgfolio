@@ -1,11 +1,7 @@
 import React from 'react';
 import { Github, Linkedin, Mail, Award, BookOpen, Briefcase, Code, Sparkles } from 'lucide-react';
-import ProjectCard from '@/components/portfolio/ProjectCard';
-import FilterButtons from '@/components/portfolio/FilterButtons';
-import { getProjects } from '@/lib/portfolio/projects';
 
-export default async function PortfolioPage() {
-  const projects = await getProjects();
+export default function PortfolioDisabledPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
       {/* Hero Section */}
@@ -72,7 +68,7 @@ export default async function PortfolioPage() {
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
             <div>
-              <div className="text-3xl font-bold text-cyan-400">{projects.length}</div>
+              <div className="text-3xl font-bold text-cyan-400">9</div>
               <div className="text-slate-400 text-sm mt-1">Production Apps</div>
             </div>
             <div>
@@ -144,17 +140,12 @@ export default async function PortfolioPage() {
         </div>
       </div>
 
-      {/* Filter Section */}
-      <div className="max-w-7xl mx-auto px-6 pb-8">
-        <FilterButtons projects={projects} />
-      </div>
-
-      {/* Projects Grid */}
+      {/* Projects Section - Disabled */}
       <div className="max-w-7xl mx-auto px-6 pb-20">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
+        <div className="text-center py-16">
+          <h2 className="text-3xl font-bold text-white mb-4">Portfolio Projects</h2>
+          <p className="text-slate-400 text-lg mb-8">This portfolio section is currently disabled.</p>
+          <p className="text-slate-500 text-sm">Visit the main portfolio page to view projects.</p>
         </div>
       </div>
 
