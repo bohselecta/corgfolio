@@ -11,7 +11,7 @@ export function DiskShelf({
   console.log('DiskShelf rendering with', projects.length, 'projects:', projects.map(p => p.title));
   
   return (
-    <div className="mt-4 overflow-x-auto pb-2">
+    <div className="mt-6 overflow-x-auto pb-2">
       <ul className="flex snap-x snap-mandatory gap-2 sm:gap-4 px-1 w-full">
         {projects.map((p, i) => (
           <li key={p.id} className="snap-start flex-shrink-0">
