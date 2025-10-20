@@ -41,7 +41,6 @@ export default function SplashPage() {
         <div className="mt-10 sm:mt-12 md:mt-14 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-7 md:gap-10 pb-16">
           <Card
             variant="fun"
-            badge={<><span className="text-lg">✨</span><span>Fun Site</span></>}
             title="Fun Site"
             description="Experience the 3D floppy disk carousel, playful interactions, and a creative vibe."
             href="/corgfolio"
@@ -51,7 +50,6 @@ export default function SplashPage() {
           />
           <Card
             variant="pro"
-            badge={<><span className="text-lg">🖥️</span><span>Professional</span></>}
             title="Professional"
             description="Clean portfolio showcasing projects, skills, and experience. Built for recruiters and clients."
             href="/portfolio"
