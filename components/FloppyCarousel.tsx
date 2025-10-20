@@ -176,7 +176,7 @@ function FloppyDisk({ index, scroll }: { index: number; scroll: () => number }) 
         const diskSpacing = 3.5;
         meshRef.current.position.x = distanceFromCenter * diskSpacing;
         meshRef.current.position.z = -absDistance * 0.8;
-        meshRef.current.position.y = -1.5 - absDistance * 0.3; // Position below floor
+        meshRef.current.position.y = 0.2 - absDistance * 0.3; // Position closer to floor
         
         // Rotation
         const rotationAngle = Math.sign(distanceFromCenter) * Math.PI * 0.25 * Math.min(absDistance, 2);
@@ -543,7 +543,7 @@ function Scene() {
 
 export default function FloppyCarousel() {
     return (
-        <div className="relative h-[90svh] w-full bg-[#000011]">
+        <div className="relative h-[90svh] w-full bg-gradient-to-r from-[#1a1a2e] via-[#16213e] to-[#0f3460]">
             <Canvas 
                 camera={{ position: [0, 1, 8], fov: 50 }}
                 shadows
@@ -567,38 +567,13 @@ export default function FloppyCarousel() {
                 <h2 className="neon text-4xl font-black leading-tight tracking-tight text-white md:text-6xl">
                     Step into the <span className="text-[var(--brand-warm)]">Corg-verse</span>
                 </h2>
-                <p className="mt-3 text-[var(--brand-ink)]/80">
-                  Scroll to navigate through the floppy disk collection.
-                </p>
                 
-                {/* Personal Picture Circle - Hidden on mobile */}
-                <div className="mt-8 flex justify-center hidden md:flex">
-                    <div className="relative rounded-full border-2 border-cyan-400/50 bg-gradient-to-br from-cyan-400/20 to-purple-500/20 backdrop-blur-sm" style={{ width: '175px', height: '175px' }}>
-                        {/* Your profile picture */}
-                        <img 
-                            src="/profile-pic.jpg" 
-                            alt="Profile" 
-                            className="absolute inset-0 rounded-full object-cover"
-                        />
-                    </div>
-                </div>
             </div>
 
             {/* subtle gradient top/bottom to blend */}
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[var(--brand-bg)] to-transparent"></div>
             <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[var(--brand-bg)] to-transparent"></div>
             
-            {/* Mobile-only Profile Picture - Below carousel */}
-            <div className="absolute inset-x-0 bottom-[-200px] flex justify-center md:hidden pb-8">
-                <div className="relative rounded-full border-2 border-cyan-400/50 bg-gradient-to-br from-cyan-400/20 to-purple-500/20 backdrop-blur-sm" style={{ width: '120px', height: '120px' }}>
-                    {/* Your profile picture */}
-                    <img 
-                        src="/profile-pic.jpg" 
-                        alt="Profile" 
-                        className="absolute inset-0 rounded-full object-cover"
-                    />
-                </div>
-            </div>
         </div>
     );
 }

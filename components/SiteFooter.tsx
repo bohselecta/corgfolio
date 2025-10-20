@@ -76,10 +76,25 @@ export default function SiteFooter() {
 
         {/* Contact + subscribe */}
         <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-          <h4 className="text-lg font-bold text-white">Stay in the loop</h4>
-          <p className="mt-1 text-sm text-white/70">
-            Occasional updates on new experiments, open-source work, and talks.
-          </p>
+          <div className="flex items-start gap-4">
+            <div className="flex-shrink-0">
+              <div className="relative rounded-full border-2 border-cyan-400/50 bg-gradient-to-br from-cyan-400/20 to-purple-500/20 backdrop-blur-sm" style={{ width: '60px', height: '60px' }}>
+                <Image
+                  src="/profile-pic.jpg"
+                  alt="Hayden Lindley"
+                  fill
+                  className="rounded-full object-cover"
+                  sizes="60px"
+                />
+              </div>
+            </div>
+            <div className="flex-1">
+              <h4 className="text-lg font-bold text-white">Stay in the loop</h4>
+              <p className="mt-1 text-sm text-white/70">
+                Occasional updates on new experiments, open-source work, and talks.
+              </p>
+            </div>
+          </div>
 
           <form onSubmit={onSubmit} className="mt-3 flex gap-2">
             <label htmlFor="email" className="sr-only">Email</label>
