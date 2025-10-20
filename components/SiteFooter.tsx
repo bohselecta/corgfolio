@@ -35,20 +35,25 @@ export default function SiteFooter() {
         {/* Penelope block */}
         <div className="relative rounded-2xl border border-white/10 bg-white/5 p-5 shadow-[0_10px_40px_rgba(0,0,0,.35)]">
           <div className="grid grid-cols-[120px_auto] gap-4 md:grid-cols-[160px_auto]">
-            <div className="relative aspect-square overflow-hidden rounded-xl bg-black/30 ring-1 ring-white/10">
-              <Image
-                src="/corgi-footer-wheelchair.png"
-                alt="Penelope, the tricolor corgi in a purple wheelchair"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 120px, 160px"
-                priority={false}
-              />
+            <div className="relative">
+              <div className="relative aspect-square overflow-hidden rounded-xl bg-black/30 ring-1 ring-white/10">
+                <Image
+                  src="/corgi-footer-wheelchair.png"
+                  alt="Penelope, the tricolor corgi in a purple wheelchair"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 120px, 160px"
+                  priority={false}
+                />
+              </div>
+              <p className="mt-2 text-xs text-white/60 text-center">
+                Based in Austin • Available for contract or full-time.
+              </p>
             </div>
 
             <div className="flex min-w-0 flex-col justify-center">
               <h3 className="text-xl font-extrabold tracking-tight text-white">
-                Meet Penelope 🐾
+                <span className="text-lg brightness-125 drop-shadow-sm">🐾</span> Meet Penelope
               </h3>
               <p className="mt-1 text-[15px] leading-relaxed text-white/80">
                 She&apos;s the studio mascot and my reminder to build tech that cares for people.
@@ -65,10 +70,6 @@ export default function SiteFooter() {
                   className="absolute -left-2 top-4 h-3 w-3 rotate-45 border-l border-t border-white/15 bg-black/30"
                 />
               </div>
-
-              <p className="mt-3 text-sm text-white/60">
-                Based in Austin • Available for contract or full-time.
-              </p>
             </div>
           </div>
         </div>
@@ -121,7 +122,6 @@ export default function SiteFooter() {
               <ul className="mt-1 space-y-1 text-sm text-white/70">
                 <li><a href="https://github.com/bohselecta" target="_blank" rel="noopener" className="hover:text-white">GitHub</a></li>
                 <li><a href="https://www.linkedin.com/in/hayden-lindley/" target="_blank" rel="noopener" className="hover:text-white">LinkedIn</a></li>
-                <li><a href="https://corgfolio.com" target="_blank" rel="noopener" className="hover:text-white">Corg-folio</a></li>
                 <li><a href="https://chatsaid.com" target="_blank" rel="noopener" className="hover:text-white">Chatsaid</a></li>
               </ul>
             </div>

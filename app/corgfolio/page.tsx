@@ -12,9 +12,9 @@ const projects = [
   { id: "neon-studio", title: "Neon Studio", img: "/screenshots/screenshot1.jpg" },
   { id: "xr-landing", title: "XR Landing", img: "/screenshots/screenshot2.jpg" },
   { id: "gummy-brand", title: "Gummy Brand", img: "/screenshots/screenshot3.jpg" },
-  { id: "ai-chat", title: "AI Chat Interface", img: "/screenshots/screenshot4.jpg" },
-  { id: "data-viz", title: "Data Visualization", img: "/screenshots/screenshot5.jpg" },
-  { id: "mobile-app", title: "Mobile App Design", img: "/screenshots/screenshot6.jpg" },
+  { id: "ai-chat-interface", title: "AI Chat Interface", img: "/screenshots/screenshot4.jpg" },
+  { id: "data-visualization", title: "Data Visualization", img: "/screenshots/screenshot5.jpg" },
+  { id: "mobile-app-design", title: "Mobile App Design", img: "/screenshots/screenshot6.jpg" },
   { id: "web-platform", title: "Web Platform", img: "/screenshots/screenshot7.jpg" },
   { id: "creative-tools", title: "Creative Tools", img: "/screenshots/screenshot8.jpg" },
   { id: "portfolio-site", title: "Portfolio Site", img: "/screenshots/screenshot9.jpg" }
