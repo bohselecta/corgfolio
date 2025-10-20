@@ -112,7 +112,7 @@ export default function SiteFooter() {
             <div className="rounded-xl border border-white/10 bg-black/30 p-3">
               <h5 className="text-sm font-semibold text-white/90">Contact</h5>
               <ul className="mt-1 space-y-1 text-sm text-white/70">
-                <li><a href="mailto:hlindley@gmail.com" className="hover:text-white">hlindley@gmail.com</a></li>
+                <li><a href="mailto:hlindley@outlook.com" className="hover:text-white">hlindley@outlook.com</a></li>
                 <li><a href="/resume" className="hover:text-white">Resume (PDF)</a></li>
               </ul>
             </div>

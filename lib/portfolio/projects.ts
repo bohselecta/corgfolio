@@ -4,191 +4,191 @@ import { Project } from '@/types/portfolio/project';
 const projectsData = [
   {
     id: 1,
-    title: "Neon Studio",
-    description: "A modern web application showcasing neon-themed design elements and interactive animations. Built with React and Three.js for immersive 3D experiences.",
+    title: "Tablature",
+    description: "A privacy-first platform designed to align team intent and execution. Allows workers to share needs safely while providing managers with clear insights without personal diaries.",
     category: "web",
     tech: [
-      "React",
-      "Three.js",
+      "Next.js",
+      "TypeScript",
       "Tailwind CSS"
     ],
-    liveUrl: "https://neon-studio.example.com",
-    githubUrl: "https://github.com/bohselecta/neon-studio",
+    liveUrl: "https://www.tablature.io/",
+    githubUrl: "https://github.com/bohselecta/middle-ground",
     featured: true,
-    previewImage: "/screenshots/screenshot1.jpg",
-    addedDate: "2025-10-19",
+    previewImage: "/previews/tablature.jpg",
+    addedDate: "2025-01-15",
     tags: [
-      "react",
-      "three.js",
+      "next.js",
+      "typescript",
       "tailwind-css"
     ]
   },
   {
     id: 2,
-    title: "XR Landing",
-    description: "An immersive landing page for XR experiences featuring spatial design and interactive elements. Optimized for both desktop and mobile VR/AR viewing experiences.",
-    category: "web",
-    tech: [
-      "Next.js",
-      "WebXR",
-      "Three.js"
-    ],
-    liveUrl: "https://xr-landing.example.com",
-    githubUrl: "https://github.com/bohselecta/xr-landing",
-    featured: true,
-    previewImage: "/screenshots/screenshot2.jpg",
-    addedDate: "2025-10-19",
-    tags: [
-      "next.js",
-      "webxr",
-      "three.js"
-    ]
-  },
-  {
-    id: 3,
-    title: "Gummy Brand",
-    description: "Complete brand identity system for a confectionery company with playful animations and vibrant colors. Includes logo design, packaging concepts, and digital marketing materials.",
-    category: "creative",
-    tech: [
-      "Figma",
-      "After Effects",
-      "Illustrator"
-    ],
-    liveUrl: "https://gummy-brand.example.com",
-    githubUrl: "https://github.com/bohselecta/gummy-brand",
-    featured: true,
-    previewImage: "/screenshots/screenshot3.jpg",
-    addedDate: "2025-10-19",
-    tags: [
-      "figma",
-      "after-effects",
-      "illustrator"
-    ]
-  },
-  {
-    id: 4,
-    title: "AI Chat Interface",
-    description: "A sleek chat interface powered by AI with real-time message streaming and voice input capabilities. Features custom animations and responsive design for seamless user experience.",
+    title: "Mr Deep Seeks",
+    description: "An AI-powered search platform that provides intelligent search capabilities with advanced query processing and contextual results.",
     category: "ai",
     tech: [
       "React",
       "Node.js",
-      "OpenAI API"
+      "AI/ML"
     ],
-    liveUrl: "https://ai-chat.example.com",
-    githubUrl: "https://github.com/bohselecta/ai-chat",
-    featured: false,
-    previewImage: "/screenshots/screenshot4.jpg",
-    addedDate: "2025-10-19",
+    liveUrl: "https://www.mrdeepseeks.me/",
+    githubUrl: "https://github.com/bohselecta/mrdeepseeks",
+    featured: true,
+    previewImage: "/previews/mrdeepseeks.jpg",
+    addedDate: "2025-01-15",
     tags: [
       "react",
       "node.js",
-      "openai-api"
+      "ai-ml"
     ]
   },
   {
-    id: 5,
-    title: "Data Visualization",
-    description: "Interactive data visualization dashboard with real-time updates and customizable chart types. Built with D3.js and WebGL for smooth animations and large dataset handling.",
-    category: "data-science",
-    tech: [
-      "D3.js",
-      "WebGL",
-      "Python"
-    ],
-    liveUrl: "https://data-viz.example.com",
-    githubUrl: "https://github.com/bohselecta/data-viz",
-    featured: false,
-    previewImage: "/screenshots/screenshot5.jpg",
-    addedDate: "2025-10-19",
-    tags: [
-      "d3.js",
-      "webgl",
-      "python"
-    ]
-  },
-  {
-    id: 6,
-    title: "Mobile App Design",
-    description: "Complete mobile app design system with custom components and micro-interactions. Includes user flow diagrams, wireframes, and high-fidelity prototypes.",
-    category: "creative",
-    tech: [
-      "Figma",
-      "Swift",
-      "Kotlin"
-    ],
-    liveUrl: "https://mobile-app.example.com",
-    githubUrl: "https://github.com/bohselecta/mobile-app",
-    featured: false,
-    previewImage: "/screenshots/screenshot6.jpg",
-    addedDate: "2025-10-19",
-    tags: [
-      "figma",
-      "swift",
-      "kotlin"
-    ]
-  },
-  {
-    id: 7,
-    title: "Web Platform",
-    description: "A comprehensive web platform with user authentication, dashboard, and API integration. Built with Next.js and TypeScript for scalability and maintainability.",
+    id: 3,
+    title: "Wove",
+    description: "A modern web application featuring innovative design patterns and interactive user experiences. Built with cutting-edge web technologies.",
     category: "web",
     tech: [
       "Next.js",
-      "TypeScript",
-      "PostgreSQL"
+      "Three.js",
+      "WebGL"
     ],
-    liveUrl: "https://web-platform.example.com",
-    githubUrl: "https://github.com/bohselecta/web-platform",
-    featured: false,
-    previewImage: "/screenshots/screenshot7.jpg",
-    addedDate: "2025-10-19",
+    liveUrl: "https://wove-nine.vercel.app/",
+    githubUrl: "https://github.com/bohselecta/wove",
+    featured: true,
+    previewImage: "/previews/wove.jpg",
+    addedDate: "2025-01-15",
     tags: [
       "next.js",
-      "typescript",
+      "three.js",
+      "webgl"
+    ]
+  },
+  {
+    id: 4,
+    title: "Luvler",
+    description: "A modern dating platform with intuitive user interface and advanced matching algorithms. Features real-time messaging and profile customization.",
+    category: "web",
+    tech: [
+      "React",
+      "Node.js",
+      "PostgreSQL"
+    ],
+    liveUrl: "https://luvler.com/",
+    githubUrl: "https://github.com/bohselecta/luvler",
+    featured: false,
+    previewImage: "/previews/luvler.jpg",
+    addedDate: "2025-01-15",
+    tags: [
+      "react",
+      "node.js",
       "postgresql"
     ]
   },
   {
+    id: 5,
+    title: "Schema",
+    description: "A data modeling and schema management platform that helps developers design, validate, and manage database schemas with visual tools.",
+    category: "data-science",
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "Database Design"
+    ],
+    liveUrl: "https://schema-swart.vercel.app/",
+    githubUrl: "https://github.com/bohselecta/schema",
+    featured: false,
+    previewImage: "/previews/schema.jpg",
+    addedDate: "2025-01-15",
+    tags: [
+      "next.js",
+      "typescript",
+      "database-design"
+    ]
+  },
+  {
+    id: 6,
+    title: "Etifyd Demo",
+    description: "A demonstration platform showcasing innovative web technologies and user interface patterns. Features interactive demos and real-time updates.",
+    category: "web",
+    tech: [
+      "React",
+      "WebSockets",
+      "Real-time"
+    ],
+    liveUrl: "https://etifyd-demo.vercel.app/",
+    githubUrl: "https://github.com/bohselecta/etifyd-demo",
+    featured: false,
+    previewImage: "/previews/etifyd.jpg",
+    addedDate: "2025-01-15",
+    tags: [
+      "react",
+      "websockets",
+      "real-time"
+    ]
+  },
+  {
+    id: 7,
+    title: "MechaCrew",
+    description: "A community platform for mechanical engineering professionals featuring project showcases, collaboration tools, and knowledge sharing.",
+    category: "web",
+    tech: [
+      "Next.js",
+      "Community Features",
+      "User Management"
+    ],
+    liveUrl: "https://mechacrew.org/",
+    githubUrl: "https://github.com/bohselecta/mechacrew",
+    featured: false,
+    previewImage: "/previews/mechacrew.jpg",
+    addedDate: "2025-01-15",
+    tags: [
+      "next.js",
+      "community",
+      "user-management"
+    ]
+  },
+  {
     id: 8,
-    title: "Creative Tools",
-    description: "A suite of creative tools for designers including color palette generators and asset libraries. Features collaborative workspaces and cloud synchronization.",
+    title: "Glyphos",
+    description: "A creative typography and design platform featuring custom font tools, text effects, and design utilities for creative professionals.",
     category: "creative",
     tech: [
-      "Vue.js",
-      "Node.js",
-      "MongoDB"
+      "WebGL",
+      "Typography",
+      "Design Tools"
     ],
-    liveUrl: "https://creative-tools.example.com",
-    githubUrl: "https://github.com/bohselecta/creative-tools",
+    liveUrl: "https://glyphos.vercel.app/",
+    githubUrl: "https://github.com/bohselecta/glyphos",
     featured: false,
-    previewImage: "/screenshots/screenshot8.jpg",
-    addedDate: "2025-10-19",
+    previewImage: "/previews/glyphos.jpg",
+    addedDate: "2025-01-15",
     tags: [
-      "vue.js",
-      "node.js",
-      "mongodb"
+      "webgl",
+      "typography",
+      "design-tools"
     ]
   },
   {
     id: 9,
-    title: "Portfolio Site",
-    description: "A modern portfolio website with 3D animations and interactive elements. Showcases projects with smooth transitions and responsive design.",
+    title: "Labs for America",
+    description: "A civic technology platform providing one-click deployment of community websites for schools, departments, and local organizations.",
     category: "web",
     tech: [
-      "Three.js",
-      "GSAP",
-      "WebGL"
+      "Next.js",
+      "Civic Tech",
+      "Community Tools"
     ],
-    liveUrl: "https://portfolio-site.example.com",
-    githubUrl: "https://github.com/bohselecta/portfolio-site",
+    liveUrl: "https://labs-for-america.vercel.app/",
+    githubUrl: "https://github.com/bohselecta/labs-for-america",
     featured: false,
-    previewImage: "/screenshots/screenshot9.jpg",
-    addedDate: "2025-10-19",
+    previewImage: "/previews/labs-for-america.jpg",
+    addedDate: "2025-01-15",
     tags: [
-      "three.js",
-      "gsap",
-      "webgl"
+      "next.js",
+      "civic-tech",
+      "community-tools"
     ]
   }
 ];

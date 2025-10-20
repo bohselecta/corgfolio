@@ -38,7 +38,7 @@ export default async function PortfolioPage() {
             
             <div className="flex flex-wrap gap-4 pt-4">
               <a 
-                href="mailto:hayden@example.com"
+                href="mailto:hlindley@outlook.com"
                 className="flex items-center gap-2 px-6 py-3 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg font-medium transition-colors"
               >
                 <Mail className="w-4 h-4" />
@@ -169,11 +169,11 @@ export default async function PortfolioPage() {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <a
-              href="mailto:hayden@example.com"
+              href="mailto:hlindley@outlook.com"
               className="flex items-center gap-2 px-8 py-4 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg font-medium text-lg transition-colors"
             >
               <Mail className="w-5 h-5" />
-              hayden@example.com
+              hayden@outlook.com
             </a>
             <a
               href="https://www.linkedin.com/in/hayden-lindley/"
