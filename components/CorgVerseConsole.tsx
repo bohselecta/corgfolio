@@ -74,10 +74,10 @@ export default function CorgVerseConsole({
         </div>
 
         {/* Disk browser */}
-        <div>
+        <div className="flex flex-col h-full">
           <h3 className="text-2xl font-extrabold text-white">Disk Library</h3>
           <p className="mt-1 text-white/70">Browse the floppies. Click one to insert it into the corgi console.</p>
-          <div className="mt-4">
+          <div className="flex-1 flex items-center">
             <DiskShelf projects={projects.map(({id,title}) => ({id,title}))} onInsert={handleInsert} />
           </div>
         </div>
@@ -157,11 +157,6 @@ export default function CorgVerseConsole({
                     >
                       View Source Code
                     </a>
-                  </div>
-
-                  {/* Status message */}
-                  <div className="pt-2">
-                    <span className="text-xs text-white/60">Beep boop… disk mounted.</span>
                   </div>
                 </div>
               </div>

@@ -76,11 +76,6 @@ export function FloppyDisk({ title, onInsert, tabIndex, diskNumber }: FloppyDisk
       {isHovered && (
         <div className="absolute inset-0 border-2 border-cyan-400 rounded-sm animate-pulse pointer-events-none"></div>
       )}
-      
-      {/* Disk Number Badge */}
-      <div className="absolute -top-2 -right-2 w-6 h-6 bg-cyan-500 text-white text-xs font-bold rounded-full flex items-center justify-center shadow-lg">
-        {diskNumber}
-      </div>
     </div>
   );
 }
