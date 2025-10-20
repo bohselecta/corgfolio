@@ -9,15 +9,15 @@ const SiteFooter = dynamic(() => import("@/components/SiteFooter"), { ssr: false
 
 // Simple projects array for now to avoid import issues
 const projects = [
-  { id: "neon-studio", title: "Neon Studio", img: "/screenshots/screenshot1.jpg" },
-  { id: "xr-landing", title: "XR Landing", img: "/screenshots/screenshot2.jpg" },
-  { id: "gummy-brand", title: "Gummy Brand", img: "/screenshots/screenshot3.jpg" },
-  { id: "ai-chat-interface", title: "AI Chat Interface", img: "/screenshots/screenshot4.jpg" },
-  { id: "data-visualization", title: "Data Visualization", img: "/screenshots/screenshot5.jpg" },
-  { id: "mobile-app-design", title: "Mobile App Design", img: "/screenshots/screenshot6.jpg" },
-  { id: "web-platform", title: "Web Platform", img: "/screenshots/screenshot7.jpg" },
-  { id: "creative-tools", title: "Creative Tools", img: "/screenshots/screenshot8.jpg" },
-  { id: "portfolio-site", title: "Portfolio Site", img: "/screenshots/screenshot9.jpg" }
+  { id: "1", title: "Tablature", img: "/previews/tablature.jpg" },
+  { id: "2", title: "Mr Deep Seeks", img: "/previews/mrdeepseeks.jpg" },
+  { id: "3", title: "Wove", img: "/previews/wove.jpg" },
+  { id: "4", title: "Luvler", img: "/previews/luvler.jpg" },
+  { id: "5", title: "Schema", img: "/previews/schema.jpg" },
+  { id: "6", title: "Etifyd Demo", img: "/previews/etifyd.jpg" },
+  { id: "7", title: "MechaCrew", img: "/previews/mechacrew.jpg" },
+  { id: "8", title: "Glyphos", img: "/previews/glyphos.jpg" },
+  { id: "9", title: "Labs for America", img: "/previews/labs-for-america.jpg" }
 ];
 
 export default function CorgfolioPage() {
