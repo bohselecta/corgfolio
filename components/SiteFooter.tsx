@@ -119,7 +119,7 @@ export default function SiteFooter() {
             <div className="rounded-xl border border-white/10 bg-black/30 p-3">
               <h5 className="text-sm font-semibold text-white/90">Elsewhere</h5>
               <ul className="mt-1 space-y-1 text-sm text-white/70">
-                <li><a href="https://github.com/hayden" target="_blank" rel="noopener" className="hover:text-white">GitHub</a></li>
+                <li><a href="https://github.com/bohselecta" target="_blank" rel="noopener" className="hover:text-white">GitHub</a></li>
                 <li><a href="https://www.linkedin.com/in/hayden-lindley/" target="_blank" rel="noopener" className="hover:text-white">LinkedIn</a></li>
                 <li><a href="https://corgfolio.com" target="_blank" rel="noopener" className="hover:text-white">Corg-folio</a></li>
               </ul>

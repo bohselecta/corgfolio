@@ -13,7 +13,7 @@ const projectsData = [
       "Tailwind CSS"
     ],
     liveUrl: "https://neon-studio.example.com",
-    githubUrl: "https://github.com/hayden/neon-studio",
+    githubUrl: "https://github.com/bohselecta/neon-studio",
     featured: true,
     previewImage: "/screenshots/screenshot1.jpg",
     addedDate: "2025-10-19",
@@ -34,7 +34,7 @@ const projectsData = [
       "Three.js"
     ],
     liveUrl: "https://xr-landing.example.com",
-    githubUrl: "https://github.com/hayden/xr-landing",
+    githubUrl: "https://github.com/bohselecta/xr-landing",
     featured: true,
     previewImage: "/screenshots/screenshot2.jpg",
     addedDate: "2025-10-19",
@@ -55,7 +55,7 @@ const projectsData = [
       "Illustrator"
     ],
     liveUrl: "https://gummy-brand.example.com",
-    githubUrl: "https://github.com/hayden/gummy-brand",
+    githubUrl: "https://github.com/bohselecta/gummy-brand",
     featured: true,
     previewImage: "/screenshots/screenshot3.jpg",
     addedDate: "2025-10-19",
@@ -76,7 +76,7 @@ const projectsData = [
       "OpenAI API"
     ],
     liveUrl: "https://ai-chat.example.com",
-    githubUrl: "https://github.com/hayden/ai-chat",
+    githubUrl: "https://github.com/bohselecta/ai-chat",
     featured: false,
     previewImage: "/screenshots/screenshot4.jpg",
     addedDate: "2025-10-19",
@@ -97,7 +97,7 @@ const projectsData = [
       "Python"
     ],
     liveUrl: "https://data-viz.example.com",
-    githubUrl: "https://github.com/hayden/data-viz",
+    githubUrl: "https://github.com/bohselecta/data-viz",
     featured: false,
     previewImage: "/screenshots/screenshot5.jpg",
     addedDate: "2025-10-19",
@@ -118,7 +118,7 @@ const projectsData = [
       "Kotlin"
     ],
     liveUrl: "https://mobile-app.example.com",
-    githubUrl: "https://github.com/hayden/mobile-app",
+    githubUrl: "https://github.com/bohselecta/mobile-app",
     featured: false,
     previewImage: "/screenshots/screenshot6.jpg",
     addedDate: "2025-10-19",
@@ -139,7 +139,7 @@ const projectsData = [
       "PostgreSQL"
     ],
     liveUrl: "https://web-platform.example.com",
-    githubUrl: "https://github.com/hayden/web-platform",
+    githubUrl: "https://github.com/bohselecta/web-platform",
     featured: false,
     previewImage: "/screenshots/screenshot7.jpg",
     addedDate: "2025-10-19",
@@ -160,7 +160,7 @@ const projectsData = [
       "MongoDB"
     ],
     liveUrl: "https://creative-tools.example.com",
-    githubUrl: "https://github.com/hayden/creative-tools",
+    githubUrl: "https://github.com/bohselecta/creative-tools",
     featured: false,
     previewImage: "/screenshots/screenshot8.jpg",
     addedDate: "2025-10-19",
@@ -181,7 +181,7 @@ const projectsData = [
       "WebGL"
     ],
     liveUrl: "https://portfolio-site.example.com",
-    githubUrl: "https://github.com/hayden/portfolio-site",
+    githubUrl: "https://github.com/bohselecta/portfolio-site",
     featured: false,
     previewImage: "/screenshots/screenshot9.jpg",
     addedDate: "2025-10-19",
