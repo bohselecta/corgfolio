@@ -58,27 +58,6 @@ export default function SplashPage() {
             className="min-h-[480px]"
           />
         </div>
-
-        {/* Bottom Info */}
-        <div className="text-center mb-10">
-          <p className="text-sm text-white/70">
-            Both sites share unified project data • Updated via the dashboard
-          </p>
-          <div className="flex items-center justify-center mt-4 space-x-6 text-white/60">
-            <div className="flex items-center">
-              <span className="mr-2">🎨</span>
-              <span className="text-xs">Creative</span>
-            </div>
-            <div className="flex items-center">
-              <span className="mr-2">💻</span>
-              <span className="text-xs">Technical</span>
-            </div>
-            <div className="flex items-center">
-              <span className="mr-2">✨</span>
-              <span className="text-xs">Interactive</span>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
