@@ -41,7 +41,7 @@ export default function PortfolioDisabledPage() {
                 Get In Touch
               </a>
               <a 
-                href="https://linkedin.com/in/haydenlindley"
+                href="https://www.linkedin.com/in/hayden-lindley/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-lg font-medium transition-colors"
@@ -167,7 +167,7 @@ export default function PortfolioDisabledPage() {
               hayden@example.com
             </a>
             <a
-              href="https://linkedin.com/in/haydenlindley"
+              href="https://www.linkedin.com/in/hayden-lindley/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-lg font-medium text-lg transition-colors"
