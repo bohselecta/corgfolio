@@ -19,14 +19,14 @@ export default function HeroHeader() {
           <h1 className="text-2xl font-black tracking-tight text-white neon">
             Hayden&apos;s <span className="text-[var(--brand-warm)]">Corg-folio</span>
           </h1>
-          <p className="text-sm text-[var(--brand-muted)]">Designer • Builder • Arcade-grade pixels</p>
+          <p className="text-sm text-[var(--brand-muted)]">Designer • Builder • Thinker</p>
         </div>
       </div>
 
       <div className="flex items-center gap-4">
         <nav className="hidden gap-6 md:flex">
           <a className="text-sm text-[var(--brand-ink)]/80 hover:text-white" href="#corg-verse-console">Projects</a>
-          <a className="text-sm text-[var(--brand-ink)]/80 hover:text-white" href="#about">About</a>
+          <a className="text-sm text-[var(--brand-ink)]/80 hover:text-white" href="https://chatsaid.com" target="_blank" rel="noopener">About</a>
           <a className="text-sm text-[var(--brand-ink)]/80 hover:text-white" href="/resume.html">Resume</a>
           <a className="text-sm text-[var(--brand-ink)]/80 hover:text-white" href="#contact">Contact</a>
         </nav>

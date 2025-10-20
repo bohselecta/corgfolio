@@ -124,7 +124,7 @@ export default function SiteFooter() {
           )}
 
           <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <div className="rounded-xl border border-white/10 bg-black/30 p-3">
+            <div id="contact" className="rounded-xl border border-white/10 bg-black/30 p-3">
               <h5 className="text-sm font-semibold text-white/90">Contact</h5>
               <ul className="mt-1 space-y-1 text-sm text-white/70">
                 <li><a href="mailto:hlindley@outlook.com" className="hover:text-white">hlindley@outlook.com</a></li>

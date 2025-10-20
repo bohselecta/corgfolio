@@ -24,7 +24,7 @@ function createFloppyDisk(index: number) {
     
     // === MAIN BODY (based on SVG proportions) ===
     // SVG shows: width=668, height=701, so aspect ratio ~0.95
-    const bodyGeometry = new THREE.BoxGeometry(2.0, 2.1, 0.1, 4, 4, 1);
+    const bodyGeometry = new THREE.BoxGeometry(2.0, 2.1, 0.08, 4, 4, 1);
     const bodyMaterial = new THREE.MeshStandardMaterial({ 
         color: 0xB6B19A,  // Custom beige color
         roughness: 0.85,
