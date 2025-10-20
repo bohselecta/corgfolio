@@ -9,103 +9,103 @@ export interface ProjectData {
 
 export const projectData: ProjectData[] = [
   {
-    id: "neon-studio",
-    title: "Neon Studio",
+    id: "1",
+    title: "Tablature",
     description: [
-      "A modern web application showcasing neon-themed design elements and interactive animations.",
-      "Built with React and Three.js for immersive 3D experiences."
+      "A privacy-first platform designed to align team intent and execution.",
+      "Allows workers to share needs safely while providing managers with clear insights without personal diaries."
     ],
-    deploymentUrl: "https://neon-studio.example.com",
-    githubUrl: "https://github.com/hayden/neon-studio",
-    screenshotPath: "/screenshots/screenshot1.jpg"
+    deploymentUrl: "https://www.tablature.io/",
+    githubUrl: "https://github.com/bohselecta/middle-ground",
+    screenshotPath: "/previews/tablature.jpg"
   },
   {
-    id: "xr-landing",
-    title: "XR Landing",
+    id: "2",
+    title: "Mr Deep Seeks",
     description: [
-      "An immersive landing page for XR experiences featuring spatial design and interactive elements.",
-      "Optimized for both desktop and mobile VR/AR viewing experiences."
+      "An AI-powered search platform that provides intelligent search capabilities.",
+      "Features advanced query processing and contextual results for enhanced user experience."
     ],
-    deploymentUrl: "https://xr-landing.example.com",
-    githubUrl: "https://github.com/hayden/xr-landing",
-    screenshotPath: "/screenshots/screenshot2.jpg"
+    deploymentUrl: "https://www.mrdeepseeks.me/",
+    githubUrl: "https://github.com/bohselecta/mrdeepseeks",
+    screenshotPath: "/previews/mrdeepseeks.jpg"
   },
   {
-    id: "gummy-brand",
-    title: "Gummy Brand",
+    id: "3",
+    title: "Wove",
     description: [
-      "Complete brand identity system for a confectionery company with playful animations and vibrant colors.",
-      "Includes logo design, packaging concepts, and digital marketing materials."
+      "A modern web application featuring innovative design patterns and interactive user experiences.",
+      "Built with cutting-edge web technologies for immersive digital experiences."
     ],
-    deploymentUrl: "https://gummy-brand.example.com",
-    githubUrl: "https://github.com/hayden/gummy-brand",
-    screenshotPath: "/screenshots/screenshot3.jpg"
+    deploymentUrl: "https://wove-nine.vercel.app/",
+    githubUrl: "https://github.com/bohselecta/wove",
+    screenshotPath: "/previews/wove.jpg"
   },
   {
-    id: "ai-chat-interface",
-    title: "AI Chat Interface",
+    id: "4",
+    title: "Luvler",
     description: [
-      "A sleek chat interface powered by AI with real-time message streaming and voice input capabilities.",
-      "Features custom animations and responsive design for seamless user experience."
+      "A modern dating platform with intuitive user interface and advanced matching algorithms.",
+      "Features real-time messaging and profile customization for meaningful connections."
     ],
-    deploymentUrl: "https://ai-chat.example.com",
-    githubUrl: "https://github.com/hayden/ai-chat",
-    screenshotPath: "/screenshots/screenshot4.jpg"
+    deploymentUrl: "https://luvler.com/",
+    githubUrl: "https://github.com/bohselecta/luvler",
+    screenshotPath: "/previews/luvler.jpg"
   },
   {
-    id: "data-visualization",
-    title: "Data Visualization",
+    id: "5",
+    title: "Schema",
     description: [
-      "Interactive data visualization dashboard with real-time updates and customizable chart types.",
-      "Built with D3.js and WebGL for smooth animations and large dataset handling."
+      "A data modeling and schema management platform that helps developers design, validate, and manage database schemas.",
+      "Features visual tools for efficient database design and management."
     ],
-    deploymentUrl: "https://data-viz.example.com",
-    githubUrl: "https://github.com/hayden/data-viz",
-    screenshotPath: "/screenshots/screenshot5.jpg"
+    deploymentUrl: "https://schema-swart.vercel.app/",
+    githubUrl: "https://github.com/bohselecta/schema",
+    screenshotPath: "/previews/schema.jpg"
   },
   {
-    id: "mobile-app-design",
-    title: "Mobile App Design",
+    id: "6",
+    title: "Etifyd Demo",
     description: [
-      "Complete mobile app design system with custom components and micro-interactions.",
-      "Includes user flow diagrams, wireframes, and high-fidelity prototypes."
+      "A demonstration platform showcasing innovative web technologies and user interface patterns.",
+      "Features interactive demos and real-time updates for engaging user experiences."
     ],
-    deploymentUrl: "https://mobile-app.example.com",
-    githubUrl: "https://github.com/hayden/mobile-app",
-    screenshotPath: "/screenshots/screenshot6.jpg"
+    deploymentUrl: "https://etifyd-demo.vercel.app/",
+    githubUrl: "https://github.com/bohselecta/etifyd-demo",
+    screenshotPath: "/previews/etifyd.jpg"
   },
   {
-    id: "web-platform",
-    title: "Web Platform",
+    id: "7",
+    title: "MechaCrew",
     description: [
-      "A comprehensive web platform with user authentication, dashboard, and API integration.",
-      "Built with Next.js and TypeScript for scalability and maintainability."
+      "A community platform for mechanical engineering professionals featuring project showcases and collaboration tools.",
+      "Enables knowledge sharing and networking within the mechanical engineering community."
     ],
-    deploymentUrl: "https://web-platform.example.com",
-    githubUrl: "https://github.com/hayden/web-platform",
-    screenshotPath: "/screenshots/screenshot7.jpg"
+    deploymentUrl: "https://mechacrew.org/",
+    githubUrl: "https://github.com/bohselecta/mechacrew",
+    screenshotPath: "/previews/mechacrew.jpg"
   },
   {
-    id: "creative-tools",
-    title: "Creative Tools",
+    id: "8",
+    title: "Glyphos",
     description: [
-      "A suite of creative tools for designers including color palette generators and asset libraries.",
-      "Features collaborative workspaces and cloud synchronization."
+      "A creative typography and design platform featuring custom font tools, text effects, and design utilities.",
+      "Designed for creative professionals who need advanced typography and design capabilities."
     ],
-    deploymentUrl: "https://creative-tools.example.com",
-    githubUrl: "https://github.com/hayden/creative-tools",
-    screenshotPath: "/screenshots/screenshot8.jpg"
+    deploymentUrl: "https://glyphos.vercel.app/",
+    githubUrl: "https://github.com/bohselecta/glyphos",
+    screenshotPath: "/previews/glyphos.jpg"
   },
   {
-    id: "portfolio-site",
-    title: "Portfolio Site",
+    id: "9",
+    title: "Labs for America",
     description: [
-      "A modern portfolio website with 3D animations and interactive elements.",
-      "Showcases projects with smooth transitions and responsive design."
+      "A civic technology platform providing one-click deployment of community websites.",
+      "Enables schools, departments, and local organizations to quickly establish their online presence."
     ],
-    deploymentUrl: "https://portfolio-site.example.com",
-    githubUrl: "https://github.com/hayden/portfolio-site",
-    screenshotPath: "/screenshots/screenshot9.jpg"
+    deploymentUrl: "https://labs-for-america.vercel.app/",
+    githubUrl: "https://github.com/bohselecta/labs-for-america",
+    screenshotPath: "/previews/labs-for-america.jpg"
   }
 ];
 
